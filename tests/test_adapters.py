@@ -28,3 +28,15 @@ def test_ra_flags_missing_constraint():
     candidate["constraints"] = []
     mutated = Pair(pair.pair_id, pair.family, pair.reference_ir, candidate, False, pair.contract)
     assert RAAdapter().score(mutated).outcome == "faulty"
+
+
+def test_ra_normalizes_compact_variable_names():
+    """``x1`` (reference_ir) must be scored against ``x_1`` (ground-truth domain)."""
+    from src.benchmark.reference_ir import get_reference_ir
+    from src.benchmark.verified_evaluation import ir_to_dict
+
+    reference = get_reference_ir("Knapsack")  # compact names x1, x2, x3
+    pair = Pair("p", "Knapsack", ir_to_dict(reference), ir_to_dict(reference), True, CONTRACT)
+    decision = RAAdapter().score(pair)
+    assert decision.diagnostics["renamed_variables"] == {"x1": "x_1", "x2": "x_2", "x3": "x_3"}
+    assert decision.outcome == "equivalent"

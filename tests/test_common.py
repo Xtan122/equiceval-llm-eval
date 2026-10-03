@@ -7,9 +7,8 @@ def test_rates_class_conditional():
     metrics = rates(labels, outcomes)
     assert metrics["false_alarm_rate"]["value"] == 0.5
     assert metrics["error_recall"]["value"] == 0.5
-    assert metrics["false_acceptance_rate"]["value"] == 0.5
     assert metrics["equivalent_confirmation_rate"]["value"] == 0.5
-    assert metrics["coverage"]["value"] == 1.0
+    assert metrics["unresolved_rate"]["value"] == 0.0
 
 
 def test_rates_unverified_excluded_from_denominators():

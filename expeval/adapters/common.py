@@ -3,7 +3,8 @@
 ``Pair`` is one (reference, candidate, verified label) unit. Each method adapter
 reduces a method's native output to a ``Decision`` with a 5-value outcome:
 ``equivalent`` / ``faulty`` / ``tolerance`` / ``unresolved`` / ``unsupported``.
-The rate helpers then compute class-conditional FPR / Recall / FAR / Coverage.
+The rate helpers then compute class-conditional FPR / Recall and the
+supplementary rates the target document asks for (unresolved / unsupported).
 """
 from __future__ import annotations
 
@@ -58,13 +59,12 @@ def _rate(numerator: int, denominator: int) -> Dict[str, Any]:
 
 
 def rates(labels: Sequence[Optional[bool]], outcomes: Sequence[str],
-          accepted=("equivalent",), decisive=("equivalent", "faulty", "tolerance")) -> Dict[str, Any]:
+          accepted=("equivalent",)) -> Dict[str, Any]:
     if len(labels) != len(outcomes):
         raise ValueError("labels and outcomes must have equal length")
     eq = [i for i, label in enumerate(labels) if label is True]
     bad = [i for i, label in enumerate(labels) if label is False]
     accepted = set(accepted)
-    decisive = set(decisive)
     return {
         "n_total": len(labels),
         "n_equivalent": len(eq),
@@ -72,11 +72,9 @@ def rates(labels: Sequence[Optional[bool]], outcomes: Sequence[str],
         "n_unverified": sum(label is None for label in labels),
         "false_alarm_rate": _rate(sum(outcomes[i] == "faulty" for i in eq), len(eq)),
         "error_recall": _rate(sum(outcomes[i] == "faulty" for i in bad), len(bad)),
-        "false_acceptance_rate": _rate(sum(outcomes[i] in accepted for i in bad), len(bad)),
         "equivalent_confirmation_rate": _rate(sum(outcomes[i] in accepted for i in eq), len(eq)),
         "unresolved_rate": _rate(sum(o == "unresolved" for o in outcomes), len(outcomes)),
         "unsupported_rate": _rate(sum(o == "unsupported" for o in outcomes), len(outcomes)),
-        "coverage": _rate(sum(o in decisive for o in outcomes), len(outcomes)),
         "outcome_counts": dict(Counter(outcomes)),
     }
 

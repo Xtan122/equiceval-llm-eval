@@ -9,9 +9,15 @@ its own most predictive signals:
 ``Cons-P`` is excluded from the default because RA's own analysis shows harmless
 redundant constraints do not change solver quality; it is available as a
 sensitivity via ``use_cons_precision=True``.
+
+Candidate variables are renamed to the ground-truth variable names before
+scoring, so Cons-RMSE samples the GT domain with matching keys. Without this,
+formulations that name ``x1`` (compact) instead of ``x_1`` (ground truth) would
+be scored against empty samples and flagged as faulty.
 """
 from __future__ import annotations
 
+import re
 from time import perf_counter
 
 from src.baseline.evaluator import BaselineEvaluator
@@ -21,8 +27,27 @@ from src.benchmark.verified_evaluation import ir_from_dict
 from expeval.adapters.common import Decision, Pair
 
 
-def _constraint_callable(constraint):
-    coeffs = dict(constraint.coeffs)
+def _normalize(name: str) -> str:
+    """Case- and separator-insensitive key: ``x_1`` and ``x1`` both give ``x1``."""
+    return re.sub(r"[^a-z0-9]", "", name.lower())
+
+
+def _name_map(candidate_variables, gt_variables):
+    """Map candidate variable names onto ground-truth names by normalized form."""
+    gt_by_norm = {_normalize(name): name for name in gt_variables}
+    mapping = {}
+    for name in candidate_variables:
+        target = gt_by_norm.get(_normalize(name))
+        if target is not None and target != name:
+            mapping[name] = target
+    return mapping
+
+
+def _constraint_callable(constraint, name_map):
+    coeffs = {}
+    for var, coef in constraint.coeffs.items():
+        target = name_map.get(var, var)
+        coeffs[target] = coeffs.get(target, 0.0) + coef
     constant = constraint.constant
 
     def func(x, coeffs=coeffs, constant=constant):
@@ -45,11 +70,17 @@ class RAAdapter:
         if problem not in PROBLEMS_REGISTRY:
             return Decision(pair.pair_id, self.name, "unsupported",
                             {"reason": f"no GroundTruthProblem for {problem!r}"})
+
+        gt_problem = PROBLEMS_REGISTRY[problem]
         candidate = ir_from_dict(pair.candidate_ir)
-        cand_cons = [(c.name, _constraint_callable(c)) for c in candidate.constraints]
+        name_map = _name_map(candidate.variables, gt_problem.variables)
+        cand_vars = {name_map.get(var, var) for var in candidate.variables}
+        cand_cons = [(c.name, _constraint_callable(c, name_map))
+                     for c in candidate.constraints]
+
         started = perf_counter()
         metrics = BaselineEvaluator(problem).evaluate_candidate(
-            candidate_variables=set(candidate.variables),
+            candidate_variables=cand_vars,
             candidate_constraints=cand_cons,
             candidate_optimal_val=None,
         )
@@ -77,6 +108,7 @@ class RAAdapter:
                 "cons_rmse": metrics.cons_rmse,
                 "optimality_gap": gap,
                 "obj_rmse": metrics.obj_rmse,
+                "renamed_variables": name_map,
             },
             cost={"elapsed_seconds": elapsed},
         )
