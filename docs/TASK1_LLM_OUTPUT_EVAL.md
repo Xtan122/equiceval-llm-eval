@@ -104,7 +104,7 @@ RA không có verdict. Repo dùng 3 quy tắc (báo cả 3):
 
 - `false_alarm_rate` (FPR) = cặp nhãn `True` bị báo `faulty` / số cặp `True`.
 - `error_recall` = cặp nhãn `False` bị báo `faulty` / số cặp `False`.
-- `false_acceptance_rate` (FAR), `equivalent_confirmation_rate`, `coverage`.
+- `equivalent_confirmation_rate`.
 - `unresolved_rate` / `unsupported_rate` vẫn ở mẫu số.
 - `n_unverified` = số nhãn `None` (không vào FPR/Recall).
 - `false_alarm_ci` / `error_recall_ci` = clustered bootstrap theo `family`.
@@ -118,14 +118,10 @@ RA không có verdict. Repo dùng 3 quy tắc (báo cả 3):
 
 ## 9. Vấn đề đã biết — cần quyết trước khi chạy RA
 
-1. **Lệch tên biến giữa reference và RA ground truth.**
-   `src/benchmark/reference_ir.py` (EquiCEval) dùng tên gọn (`x1`, `x2`, `x3`, `x11`…),
-   còn `src/baseline/ground_truth.py` (RA) dùng tên có gạch dưới (`x_1`, `x_2`, `x_3`).
-   `RAAdapter` chấm candidate trên `sample_domain` của GT, nên nếu tên biến candidate
-   không khớp GT thì `Cons-RMSE` sai. **Cách xử lý (chọn 1 trước khi chạy):**
-   - (a) chuẩn hóa tên biến candidate về tên GT trước khi đưa vào `RAAdapter`; hoặc
-   - (b) dùng reference tên gạch dưới (từ generator) cho thí nghiệm LLM.
-   Đây là **việc đầu tiên cần làm** ở session mới.
+1. **Lệch tên biến — ĐÃ xử lý.** `RAAdapter` tự chuẩn hóa tên biến candidate về tên
+   ground truth (`x1` → `x_1`, `x11` → `x_1_1`, `z_1_2` → `z12`, …) trước khi chấm,
+   nên `Cons-RMSE` lấy mẫu đúng miền GT. Test:
+   `tests/test_adapters.py::test_ra_normalizes_compact_variable_names`.
 2. **AircraftLanding** khó oracle nhất (MILP big-M) → nhiều nhãn `None`; nếu cần độ phủ
    cao phải bổ sung quy trình gán nhãn thủ công (2 người + Cohen κ).
 3. `run_comparison` hiện gọi API tuần tự; số call = `N_model × 6 × 4`.
