@@ -107,7 +107,6 @@ RA không có verdict. Repo dùng 3 quy tắc (báo cả 3):
 - `equivalent_confirmation_rate`.
 - `unresolved_rate` / `unsupported_rate` vẫn ở mẫu số.
 - `n_unverified` = số nhãn `None` (không vào FPR/Recall).
-- `false_alarm_ci` / `error_recall_ci` = clustered bootstrap theo `family`.
 
 ## 8. Tái lập
 
@@ -131,7 +130,7 @@ RA không có verdict. Repo dùng 3 quy tắc (báo cả 3):
 - [ ] Sinh đủ output và `parse_ok` được ghi lại.
 - [ ] Có `data/llm_outputs_labeled.json` + báo **độ phủ nhãn**.
 - [ ] Cả 2 phương pháp chấm trên **cùng tập đóng băng**.
-- [ ] Report có FPR/Recall/FAR/Coverage + CI + chi phí; nhãn `None` báo riêng.
+- [ ] Report có FPR/Recall (+ unresolved/unsupported) + chi phí; nhãn `None` báo riêng.
 - [ ] `config` ghi SHA vendor + cấu hình model/prompt.
 
 ## 11. Liên hệ các task khác

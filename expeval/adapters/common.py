@@ -12,8 +12,6 @@ from collections import Counter
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Sequence
 
-import numpy as np
-
 
 @dataclass
 class Pair:
@@ -77,25 +75,3 @@ def rates(labels: Sequence[Optional[bool]], outcomes: Sequence[str],
         "unsupported_rate": _rate(sum(o == "unsupported" for o in outcomes), len(outcomes)),
         "outcome_counts": dict(Counter(outcomes)),
     }
-
-
-def clustered_ci(values: Sequence[float], families: Sequence[str]) -> Optional[List[float]]:
-    """Clustered-bootstrap 95% CI over independent problem families."""
-    if len(values) < 2 or len(set(families)) < 2:
-        return None
-    from src.benchmark.analysis import RobustStatsCalculator
-
-    low, high = RobustStatsCalculator.clustered_bootstrap_ci(
-        [float(v) for v in values], list(families))
-    return [low, high]
-
-
-def rate_ci(labels, outcomes, families, outcome_value: str, class_label: bool):
-    """CI for a class-conditional rate (e.g. FPR over label==True rows)."""
-    values, clusters = [], []
-    for label, outcome, family in zip(labels, outcomes, families):
-        if label is not class_label:
-            continue
-        values.append(1.0 if outcome == outcome_value else 0.0)
-        clusters.append(family or "unknown")
-    return clustered_ci(values, clusters)

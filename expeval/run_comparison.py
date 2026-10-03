@@ -16,7 +16,7 @@ from pathlib import Path
 from src.equiceval.contracts import PRIMARY_EQUIVAFORMULATION_CONTRACT
 
 from expeval.adapters import EquiCEvalAdapter, RAAdapter
-from expeval.adapters.common import load_pairs, rate_ci, rates
+from expeval.adapters.common import load_pairs, rates
 
 
 def _fmt(metric):
@@ -51,7 +51,6 @@ def main() -> int:
     }
 
     labels = [p.label for p in pairs]
-    families = [p.family or "unknown" for p in pairs]
     report = {
         "config": {
             "created_utc": datetime.now(timezone.utc).isoformat(),
@@ -69,8 +68,6 @@ def main() -> int:
         decisions = [adapter.score(pair) for pair in pairs]
         outcomes = [d.outcome for d in decisions]
         method_metrics = rates(labels, outcomes)
-        method_metrics["false_alarm_ci"] = rate_ci(labels, outcomes, families, "faulty", True)
-        method_metrics["error_recall_ci"] = rate_ci(labels, outcomes, families, "faulty", False)
         report["methods"][name] = {
             "metrics": method_metrics,
             "decisions": [d.__dict__ for d in decisions],

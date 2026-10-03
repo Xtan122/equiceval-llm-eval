@@ -68,5 +68,5 @@ solver-only` uses only the optimality gap.
 - `vendor/src/` — vendored EquiCEval engine, RA baseline, LLM layer.
 - `expeval/adapters/` — `Pair`/`Decision` interface, EquiCEval and RA adapters.
 - `expeval/label_oracle.py` — independent labelling.
-- `expeval/run_comparison.py` — FPR / Recall + clustered CI (+ unresolved/unsupported rates).
+- `expeval/run_comparison.py` — FPR / Recall (+ unresolved/unsupported rates).
 - `VENDOR.lock` — vendored file hashes.
