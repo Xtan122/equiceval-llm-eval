@@ -1,0 +1,3026 @@
+{
+  "pairs": [
+    {
+      "pair_id": "eq_AircraftAssignment_0082",
+      "family": "AircraftAssignment",
+      "reference_ir": {
+        "problem_name": "AircraftAssignment",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_1_1": 100.0,
+          "x_1_2": 200.0,
+          "x_2_1": 150.0,
+          "x_2_2": 250.0,
+          "x_3_1": 200.0,
+          "x_3_2": 300.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1_1": {
+            "name": "x_1_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_1_2": {
+            "name": "x_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_1": {
+            "name": "x_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_2": {
+            "name": "x_2_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_1": {
+            "name": "x_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_2": {
+            "name": "x_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "avail_A1",
+            "coeffs": {
+              "x_1_1": 1.0,
+              "x_1_2": 1.0
+            },
+            "constant": -2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A2",
+            "coeffs": {
+              "x_2_1": 1.0,
+              "x_2_2": 1.0
+            },
+            "constant": -3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A3",
+            "coeffs": {
+              "x_3_1": 1.0,
+              "x_3_2": 1.0
+            },
+            "constant": -1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R1",
+            "coeffs": {
+              "x_1_1": -50.0,
+              "x_2_1": -60.0,
+              "x_3_1": -70.0
+            },
+            "constant": 100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R2",
+            "coeffs": {
+              "x_1_2": -70.0,
+              "x_2_2": -80.0,
+              "x_3_2": -90.0
+            },
+            "constant": 150.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftAssignment_explicit_bounds",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_1_1": 100.0,
+          "x_1_2": 200.0,
+          "x_2_1": 150.0,
+          "x_2_2": 250.0,
+          "x_3_1": 200.0,
+          "x_3_2": 300.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1_1": {
+            "name": "x_1_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_1_2": {
+            "name": "x_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_1": {
+            "name": "x_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_2": {
+            "name": "x_2_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_1": {
+            "name": "x_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_2": {
+            "name": "x_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "avail_A1",
+            "coeffs": {
+              "x_1_1": 1.0,
+              "x_1_2": 1.0
+            },
+            "constant": -2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A2",
+            "coeffs": {
+              "x_2_1": 1.0,
+              "x_2_2": 1.0
+            },
+            "constant": -3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A3",
+            "coeffs": {
+              "x_3_1": 1.0,
+              "x_3_2": 1.0
+            },
+            "constant": -1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R1",
+            "coeffs": {
+              "x_1_1": -50.0,
+              "x_2_1": -60.0,
+              "x_3_1": -70.0
+            },
+            "constant": 100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R2",
+            "coeffs": {
+              "x_1_2": -70.0,
+              "x_2_2": -80.0,
+              "x_3_2": -90.0
+            },
+            "constant": 150.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": true,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "eq_Diet_0015",
+      "family": "Diet",
+      "reference_ir": {
+        "problem_name": "Diet",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_apple": 2.0,
+          "x_banana": 1.5
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_apple": {
+            "name": "x_apple",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_banana": {
+            "name": "x_banana",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "min_vit_c",
+            "coeffs": {
+              "x_apple": -10.0,
+              "x_banana": -5.0
+            },
+            "constant": 50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "min_fiber",
+            "coeffs": {
+              "x_apple": -5.0,
+              "x_banana": -10.0
+            },
+            "constant": 30.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_vit_c",
+            "coeffs": {
+              "x_apple": 10.0,
+              "x_banana": 5.0
+            },
+            "constant": -100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_fiber",
+            "coeffs": {
+              "x_apple": 5.0,
+              "x_banana": 10.0
+            },
+            "constant": -60.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Diet_scaled",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_apple": 2.0,
+          "x_banana": 1.5
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_apple": {
+            "name": "x_apple",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_banana": {
+            "name": "x_banana",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "min_vit_c",
+            "coeffs": {
+              "x_apple": -10.0,
+              "x_banana": -5.0
+            },
+            "constant": 50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "min_fiber",
+            "coeffs": {
+              "x_apple": -5.0,
+              "x_banana": -10.0
+            },
+            "constant": 30.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_vit_c",
+            "coeffs": {
+              "x_apple": 10.0,
+              "x_banana": 5.0
+            },
+            "constant": -100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_fiber",
+            "coeffs": {
+              "x_apple": 5.0,
+              "x_banana": 10.0
+            },
+            "constant": -60.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": true,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "eq_AircraftLanding_0004",
+      "family": "AircraftLanding",
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "ground_truth"
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_1": {
+            "name": "z_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_1": {
+            "name": "z_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_2": {
+            "name": "z_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "earliness_A1",
+            "coeffs": {
+              "x_1": -1.0,
+              "e_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "lateness_A1",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep_1_2",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_2": -1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_explicit_bounds",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "ground_truth"
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_1": {
+            "name": "z_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_1": {
+            "name": "z_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_2": {
+            "name": "z_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "earliness_A1",
+            "coeffs": {
+              "x_1": -1.0,
+              "e_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "lateness_A1",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep_1_2",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_2": -1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "bound_lb_x_1",
+            "coeffs": {
+              "x_1": -1.0
+            },
+            "constant": 1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "bound_ub_x_1",
+            "coeffs": {
+              "x_1": 1.0
+            },
+            "constant": -10.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "bound_lb_x_2",
+            "coeffs": {
+              "x_2": -1.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "bound_ub_x_2",
+            "coeffs": {
+              "x_2": 1.0
+            },
+            "constant": -12.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "bound_lb_x_3",
+            "coeffs": {
+              "x_3": -1.0
+            },
+            "constant": 5.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "bound_ub_x_3",
+            "coeffs": {
+              "x_3": 1.0
+            },
+            "constant": -15.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": true,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "eq_Diet_0095",
+      "family": "Diet",
+      "reference_ir": {
+        "problem_name": "Diet",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_apple": 2.0,
+          "x_banana": 1.5
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_apple": {
+            "name": "x_apple",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_banana": {
+            "name": "x_banana",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "min_vit_c",
+            "coeffs": {
+              "x_apple": -10.0,
+              "x_banana": -5.0
+            },
+            "constant": 50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "min_fiber",
+            "coeffs": {
+              "x_apple": -5.0,
+              "x_banana": -10.0
+            },
+            "constant": 30.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_vit_c",
+            "coeffs": {
+              "x_apple": 10.0,
+              "x_banana": 5.0
+            },
+            "constant": -100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_fiber",
+            "coeffs": {
+              "x_apple": 5.0,
+              "x_banana": 10.0
+            },
+            "constant": -60.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Diet_scaled",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_apple": 2.0,
+          "x_banana": 1.5
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_apple": {
+            "name": "x_apple",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_banana": {
+            "name": "x_banana",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "min_vit_c_scaled",
+            "coeffs": {
+              "x_apple": -44.958841236393056,
+              "x_banana": -22.479420618196528
+            },
+            "constant": 224.79420618196525,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "min_fiber",
+            "coeffs": {
+              "x_apple": -5.0,
+              "x_banana": -10.0
+            },
+            "constant": 30.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_vit_c_scaled",
+            "coeffs": {
+              "x_apple": 33.92057783351068,
+              "x_banana": 16.96028891675534
+            },
+            "constant": -339.2057783351068,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_fiber",
+            "coeffs": {
+              "x_apple": 5.0,
+              "x_banana": 10.0
+            },
+            "constant": -60.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": true,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "eq_AircraftLanding_0036",
+      "family": "AircraftLanding",
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "ground_truth"
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_1": {
+            "name": "z_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_1": {
+            "name": "z_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_2": {
+            "name": "z_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "earliness_A1",
+            "coeffs": {
+              "x_1": -1.0,
+              "e_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "lateness_A1",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep_1_2",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_2": -1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_scaled",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "ground_truth"
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_1": {
+            "name": "z_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_1": {
+            "name": "z_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_2": {
+            "name": "z_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "earliness_A1_scaled",
+            "coeffs": {
+              "x_1": -2.2676226570504916,
+              "e_1": -2.2676226570504916
+            },
+            "constant": 9.070490628201966,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "lateness_A1_scaled",
+            "coeffs": {
+              "x_1": 3.2833420278676257,
+              "l_1": -3.2833420278676257
+            },
+            "constant": -13.133368111470503,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep_1_2",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_2": -1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": true,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "eq_AircraftLanding_0032",
+      "family": "AircraftLanding",
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "ground_truth"
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_1": {
+            "name": "z_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_1": {
+            "name": "z_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_2": {
+            "name": "z_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "earliness_A1",
+            "coeffs": {
+              "x_1": -1.0,
+              "e_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "lateness_A1",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep_1_2",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_2": -1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_scaled",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "ground_truth"
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_1": {
+            "name": "z_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_1": {
+            "name": "z_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_2": {
+            "name": "z_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "earliness_A1",
+            "coeffs": {
+              "x_1": -1.0,
+              "e_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "lateness_A1_scaled",
+            "coeffs": {
+              "x_1": 4.567286692654341,
+              "l_1": -4.567286692654341
+            },
+            "constant": -18.269146770617365,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep_1_2_scaled",
+            "coeffs": {
+              "x_1": 3.7940353285320803,
+              "x_2": -3.7940353285320803,
+              "z_1_2": 3794.0353285320803
+            },
+            "constant": -3786.447257875016,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": true,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "eq_Knapsack_0029",
+      "family": "Knapsack",
+      "reference_ir": {
+        "problem_name": "Knapsack",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity",
+            "coeffs": {
+              "x_1": 10.0,
+              "x_2": 20.0,
+              "x_3": 30.0
+            },
+            "constant": -50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Knapsack_scaled",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity_scaled",
+            "coeffs": {
+              "x_1": 37.39999159489325,
+              "x_2": 74.7999831897865,
+              "x_3": 112.19997478467975
+            },
+            "constant": -186.99995797446624,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": true,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "eq_AircraftAssignment_0018",
+      "family": "AircraftAssignment",
+      "reference_ir": {
+        "problem_name": "AircraftAssignment",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_1_1": 100.0,
+          "x_1_2": 200.0,
+          "x_2_1": 150.0,
+          "x_2_2": 250.0,
+          "x_3_1": 200.0,
+          "x_3_2": 300.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1_1": {
+            "name": "x_1_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_1_2": {
+            "name": "x_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_1": {
+            "name": "x_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_2": {
+            "name": "x_2_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_1": {
+            "name": "x_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_2": {
+            "name": "x_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "avail_A1",
+            "coeffs": {
+              "x_1_1": 1.0,
+              "x_1_2": 1.0
+            },
+            "constant": -2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A2",
+            "coeffs": {
+              "x_2_1": 1.0,
+              "x_2_2": 1.0
+            },
+            "constant": -3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A3",
+            "coeffs": {
+              "x_3_1": 1.0,
+              "x_3_2": 1.0
+            },
+            "constant": -1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R1",
+            "coeffs": {
+              "x_1_1": -50.0,
+              "x_2_1": -60.0,
+              "x_3_1": -70.0
+            },
+            "constant": 100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R2",
+            "coeffs": {
+              "x_1_2": -70.0,
+              "x_2_2": -80.0,
+              "x_3_2": -90.0
+            },
+            "constant": 150.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftAssignment_explicit_bounds",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_1_1": 100.0,
+          "x_1_2": 200.0,
+          "x_2_1": 150.0,
+          "x_2_2": 250.0,
+          "x_3_1": 200.0,
+          "x_3_2": 300.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1_1": {
+            "name": "x_1_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_1_2": {
+            "name": "x_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_1": {
+            "name": "x_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_2": {
+            "name": "x_2_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_1": {
+            "name": "x_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_2": {
+            "name": "x_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "avail_A1",
+            "coeffs": {
+              "x_1_1": 1.0,
+              "x_1_2": 1.0
+            },
+            "constant": -2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A2",
+            "coeffs": {
+              "x_2_1": 1.0,
+              "x_2_2": 1.0
+            },
+            "constant": -3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A3",
+            "coeffs": {
+              "x_3_1": 1.0,
+              "x_3_2": 1.0
+            },
+            "constant": -1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R1",
+            "coeffs": {
+              "x_1_1": -50.0,
+              "x_2_1": -60.0,
+              "x_3_1": -70.0
+            },
+            "constant": 100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R2",
+            "coeffs": {
+              "x_1_2": -70.0,
+              "x_2_2": -80.0,
+              "x_3_2": -90.0
+            },
+            "constant": 150.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": true,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "mut_AircraftLanding_0189",
+      "family": "AircraftLanding",
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "ground_truth"
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_1": {
+            "name": "z_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_1": {
+            "name": "z_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_2": {
+            "name": "z_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "earliness_A1",
+            "coeffs": {
+              "x_1": -1.0,
+              "e_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "lateness_A1",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep_1_2",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_2": -1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_over_constrained",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "ground_truth"
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": Infinity,
+            "provenance": "ground_truth"
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_1": {
+            "name": "z_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_1": {
+            "name": "z_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "z_3_2": {
+            "name": "z_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "earliness_A1",
+            "coeffs": {
+              "x_1": -1.0,
+              "e_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "lateness_A1",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep_1_2",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_2": -1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "over_restrictive_x_1",
+            "coeffs": {
+              "x_1": 1.0
+            },
+            "constant": -0.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": false,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "mut_AircraftAssignment_0027",
+      "family": "AircraftAssignment",
+      "reference_ir": {
+        "problem_name": "AircraftAssignment",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_1_1": 100.0,
+          "x_1_2": 200.0,
+          "x_2_1": 150.0,
+          "x_2_2": 250.0,
+          "x_3_1": 200.0,
+          "x_3_2": 300.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1_1": {
+            "name": "x_1_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_1_2": {
+            "name": "x_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_1": {
+            "name": "x_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_2": {
+            "name": "x_2_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_1": {
+            "name": "x_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_2": {
+            "name": "x_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "avail_A1",
+            "coeffs": {
+              "x_1_1": 1.0,
+              "x_1_2": 1.0
+            },
+            "constant": -2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A2",
+            "coeffs": {
+              "x_2_1": 1.0,
+              "x_2_2": 1.0
+            },
+            "constant": -3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A3",
+            "coeffs": {
+              "x_3_1": 1.0,
+              "x_3_2": 1.0
+            },
+            "constant": -1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R1",
+            "coeffs": {
+              "x_1_1": -50.0,
+              "x_2_1": -60.0,
+              "x_3_1": -70.0
+            },
+            "constant": 100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R2",
+            "coeffs": {
+              "x_1_2": -70.0,
+              "x_2_2": -80.0,
+              "x_3_2": -90.0
+            },
+            "constant": 150.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftAssignment_reversed_avail_A3",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_1_1": 100.0,
+          "x_1_2": 200.0,
+          "x_2_1": 150.0,
+          "x_2_2": 250.0,
+          "x_3_1": 200.0,
+          "x_3_2": 300.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1_1": {
+            "name": "x_1_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_1_2": {
+            "name": "x_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_1": {
+            "name": "x_2_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2_2": {
+            "name": "x_2_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_1": {
+            "name": "x_3_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3_2": {
+            "name": "x_3_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "avail_A1",
+            "coeffs": {
+              "x_1_1": 1.0,
+              "x_1_2": 1.0
+            },
+            "constant": -2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A2",
+            "coeffs": {
+              "x_2_1": 1.0,
+              "x_2_2": 1.0
+            },
+            "constant": -3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "avail_A3_sense_reversed",
+            "coeffs": {
+              "x_3_1": -1.0,
+              "x_3_2": -1.0
+            },
+            "constant": 1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R1",
+            "coeffs": {
+              "x_1_1": -50.0,
+              "x_2_1": -60.0,
+              "x_3_1": -70.0
+            },
+            "constant": 100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "demand_R2",
+            "coeffs": {
+              "x_1_2": -70.0,
+              "x_2_2": -80.0,
+              "x_3_2": -90.0
+            },
+            "constant": 150.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": false,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "mut_Knapsack_0174",
+      "family": "Knapsack",
+      "reference_ir": {
+        "problem_name": "Knapsack",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity",
+            "coeffs": {
+              "x_1": 10.0,
+              "x_2": 20.0,
+              "x_3": 30.0
+            },
+            "constant": -50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Knapsack_reversed_capacity",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity_sense_reversed",
+            "coeffs": {
+              "x_1": -10.0,
+              "x_2": -20.0,
+              "x_3": -30.0
+            },
+            "constant": 50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": false,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "mut_Knapsack_0190",
+      "family": "Knapsack",
+      "reference_ir": {
+        "problem_name": "Knapsack",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity",
+            "coeffs": {
+              "x_1": 10.0,
+              "x_2": 20.0,
+              "x_3": 30.0
+            },
+            "constant": -50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Knapsack_over_constrained",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity",
+            "coeffs": {
+              "x_1": 10.0,
+              "x_2": 20.0,
+              "x_3": 30.0
+            },
+            "constant": -50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "over_restrictive_x_3",
+            "coeffs": {
+              "x_3": 1.0
+            },
+            "constant": -0.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": false,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "mut_Knapsack_0229",
+      "family": "Knapsack",
+      "reference_ir": {
+        "problem_name": "Knapsack",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity",
+            "coeffs": {
+              "x_1": 10.0,
+              "x_2": 20.0,
+              "x_3": 30.0
+            },
+            "constant": -50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Knapsack_omit_capacity",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": []
+      },
+      "label": false,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "mut_Diet_0140",
+      "family": "Diet",
+      "reference_ir": {
+        "problem_name": "Diet",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_apple": 2.0,
+          "x_banana": 1.5
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_apple": {
+            "name": "x_apple",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_banana": {
+            "name": "x_banana",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "min_vit_c",
+            "coeffs": {
+              "x_apple": -10.0,
+              "x_banana": -5.0
+            },
+            "constant": 50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "min_fiber",
+            "coeffs": {
+              "x_apple": -5.0,
+              "x_banana": -10.0
+            },
+            "constant": 30.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_vit_c",
+            "coeffs": {
+              "x_apple": 10.0,
+              "x_banana": 5.0
+            },
+            "constant": -100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_fiber",
+            "coeffs": {
+              "x_apple": 5.0,
+              "x_banana": 10.0
+            },
+            "constant": -60.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Diet_omit_min_fiber",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_apple": 2.0,
+          "x_banana": 1.5
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_apple": {
+            "name": "x_apple",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_banana": {
+            "name": "x_banana",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "min_vit_c",
+            "coeffs": {
+              "x_apple": -10.0,
+              "x_banana": -5.0
+            },
+            "constant": 50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_vit_c",
+            "coeffs": {
+              "x_apple": 10.0,
+              "x_banana": 5.0
+            },
+            "constant": -100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_fiber",
+            "coeffs": {
+              "x_apple": 5.0,
+              "x_banana": 10.0
+            },
+            "constant": -60.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": false,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "mut_Knapsack_0023",
+      "family": "Knapsack",
+      "reference_ir": {
+        "problem_name": "Knapsack",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity",
+            "coeffs": {
+              "x_1": 10.0,
+              "x_2": 20.0,
+              "x_3": 30.0
+            },
+            "constant": -50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Knapsack_reversed_capacity",
+        "objective_sense": "maximize",
+        "objective_coeffs": {
+          "x_1": 60.0,
+          "x_2": 100.0,
+          "x_3": 120.0
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "capacity_sense_reversed",
+            "coeffs": {
+              "x_1": -10.0,
+              "x_2": -20.0,
+              "x_3": -30.0
+            },
+            "constant": 50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": false,
+      "contract": "feasible_set_and_objective_affine"
+    },
+    {
+      "pair_id": "mut_Diet_0152",
+      "family": "Diet",
+      "reference_ir": {
+        "problem_name": "Diet",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_apple": 2.0,
+          "x_banana": 1.5
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_apple": {
+            "name": "x_apple",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_banana": {
+            "name": "x_banana",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "min_vit_c",
+            "coeffs": {
+              "x_apple": -10.0,
+              "x_banana": -5.0
+            },
+            "constant": 50.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "min_fiber",
+            "coeffs": {
+              "x_apple": -5.0,
+              "x_banana": -10.0
+            },
+            "constant": 30.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_vit_c",
+            "coeffs": {
+              "x_apple": 10.0,
+              "x_banana": 5.0
+            },
+            "constant": -100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_fiber",
+            "coeffs": {
+              "x_apple": 5.0,
+              "x_banana": 10.0
+            },
+            "constant": -60.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "candidate_ir": {
+        "problem_name": "Diet_omit_min_vit_c",
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "x_apple": 2.0,
+          "x_banana": 1.5
+        },
+        "objective_constant": 0.0,
+        "variables": {
+          "x_apple": {
+            "name": "x_apple",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          },
+          "x_banana": {
+            "name": "x_banana",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 10.0,
+            "provenance": "ground_truth"
+          }
+        },
+        "constraints": [
+          {
+            "name": "min_fiber",
+            "coeffs": {
+              "x_apple": -5.0,
+              "x_banana": -10.0
+            },
+            "constant": 30.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_vit_c",
+            "coeffs": {
+              "x_apple": 10.0,
+              "x_banana": 5.0
+            },
+            "constant": -100.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "max_fiber",
+            "coeffs": {
+              "x_apple": 5.0,
+              "x_banana": 10.0
+            },
+            "constant": -60.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ]
+      },
+      "label": false,
+      "contract": "feasible_set_and_objective_affine"
+    }
+  ]
+}

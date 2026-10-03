@@ -1,0 +1,81 @@
+{
+  "created_utc": "2026-10-03T08:03:12.599623+00:00",
+  "policy": "Manual vendoring. Edit a method repo first, run its tests, then re-copy and refresh this lock.",
+  "sources": {
+    "equiceval": {
+      "repo": "../EquiCEval",
+      "paths": [
+        "vendor/src/equiceval",
+        "vendor/src/benchmark",
+        "vendor/src/utils"
+      ]
+    },
+    "ra": {
+      "repo": "../RA",
+      "paths": [
+        "vendor/src/baseline"
+      ]
+    },
+    "llm_layer": {
+      "repo": "../EquiCEval-monorepo",
+      "paths": [
+        "vendor/src/llm",
+        "vendor/src/prompts",
+        "vendor/src/benchmark/llm_runner.py",
+        "vendor/src/benchmark/llm_ir.py",
+        "vendor/src/benchmark/output_parser.py"
+      ]
+    }
+  },
+  "files": {
+    "vendor/src/__init__.py": "9f8d84fc4932231ddcaa0f7c28644ae6a9c27c29515f2856c91e09c3cc3f04d0",
+    "vendor/src/baseline/evaluator.py": "40ddab383d47f1e5156b16b52e1c0ff41162446d4e87a1a6a086a960e5b8004b",
+    "vendor/src/baseline/ground_truth.py": "a0bbba4542d3349b5185c2d252260370a1c0ee83169cae216dfe821ca3939566",
+    "vendor/src/baseline/metrics.py": "5f229791a5d5289ea0e6ca2638af008ae301cd8dcb1c07730464fb8a3ee6c790",
+    "vendor/src/benchmark/__init__.py": "cd230040e3991eefb3e39b746ce2f9b83445057b124738da65f907bacead05f2",
+    "vendor/src/benchmark/analysis.py": "45bfd8bd507b61ecdec0a861e7146fb820d5060cfb161b94d717d3f933d26de9",
+    "vendor/src/benchmark/baseline_metrics.py": "ac0fe63bc754b363e77e07af4f7356951ba2a848182d756465f921a6513bdc65",
+    "vendor/src/benchmark/baselines/__init__.py": "497f396da13d2895a3115683e0070870ba3e6ee5175ab01703eface985511efd",
+    "vendor/src/benchmark/baselines/base.py": "979aba2c1bdd71a93492920579b368fb1563618278e4a823cbbca5ae521f477c",
+    "vendor/src/benchmark/baselines/reference_form.py": "869baab6479a74dd5b1a4fef8a53f54afd282b3028cedfa6113e45d9ac1ea37d",
+    "vendor/src/benchmark/generator.py": "abbf67704f2a5691403946ce3c24e7958f6bfe84dfd61a8ad18ab755228a998f",
+    "vendor/src/benchmark/ground_truth.py": "a0bbba4542d3349b5185c2d252260370a1c0ee83169cae216dfe821ca3939566",
+    "vendor/src/benchmark/independent_oracle.py": "fb41345fc1194d5cbbb6be7e87321184a2216d8119f7e97607b339ee450c6df6",
+    "vendor/src/benchmark/llm_ir.py": "7c111d586eb1ab2ed4bc72350a39974435d9a6c0a909193e88f11cb12d71bde7",
+    "vendor/src/benchmark/llm_runner.py": "04f4d19e64e0b9f9961631560bddfd132eca1db30d7c96a1d0df473f9e46986f",
+    "vendor/src/benchmark/mutator.py": "889f3ebe0a9e656e223d3a1959fc64bd327f1319c3a3c218a8f7402e3f75157e",
+    "vendor/src/benchmark/output_parser.py": "7ada2b58abeb92b32516349cc20046a08b7f7af2ee8d7e796542ba43b208d509",
+    "vendor/src/benchmark/reference_form_baseline.py": "01724d01ec1ac3596d82f90077e4a9cea03c753a921956ca8722094b3c7386c3",
+    "vendor/src/benchmark/reference_ir.py": "961390f754594fa7b8aae4286b688f52923564f779daa1d85855d4256b0a7a69",
+    "vendor/src/benchmark/schema.py": "36b4cc1aac97f066679e3d4584d0a996e255a873f4dfdccd241ae76b8a3912e8",
+    "vendor/src/benchmark/splits.py": "a852880d836ead1de764efc352d4792d32d2b49e5158c6742beaf403b5e3fe9f",
+    "vendor/src/benchmark/transformations.py": "43c6f34fba9dae3ec62d3daa995d399e31fa1623c49ba6182b77205b047e2d9e",
+    "vendor/src/benchmark/verified_evaluation.py": "dd730b31b0ebab6bc9743ef99d26e383d3f6d8db53daca11a966dcad4ff18dec",
+    "vendor/src/benchmark/visualization.py": "c799f466abed6a61c69ea58f6a5deb101e8b76a295b3a55e60781657aa3f008c",
+    "vendor/src/benchmark/witness_metrics.py": "9034abb144c701184fb095f74b1d2e23e3165a24c3ded8cf0000d33059708864",
+    "vendor/src/equiceval/__init__.py": "988ad5b9e77399d19bd90cbbb98e39c6c836f60c9dc3446e6c2e57cee8ad92db",
+    "vendor/src/equiceval/behavioral_discrepancy.py": "0520f53f26afcd63ba25abffd18d4a610b322802b97d3fb3ad34bba046dfe693",
+    "vendor/src/equiceval/canonical_ir.py": "820f9e1129b5d4fbb68fdb4e35194d3d778e6260db31ec3ed0283af2c698e11d",
+    "vendor/src/equiceval/constraint_rmse.py": "1685000987b01ef8656c64904359170d3d3d12d4a183ce00c0156541185bab05",
+    "vendor/src/equiceval/contracts.py": "f0f0b9d3f5e772b835ac04a9dfb00deae47bf7db9f2d0e2c1bbf1ea30138de94",
+    "vendor/src/equiceval/directed_query.py": "6b13986b1d8cd30928dc3e3e7fb7fa070cf69caff264d4b0010db6be86b977e5",
+    "vendor/src/equiceval/evaluator.py": "9c41d859d44aec39096f3bce7f8602535820dde8e9a54129059a8fbf4e5b93c7",
+    "vendor/src/equiceval/evidence.py": "d886c6707f74389cbc8d21b0bf4341358dcbc7226a76b05c25b08dbce2ca8e94",
+    "vendor/src/equiceval/matching.py": "acea724c3f28b8fa0792be96773630648c5ca83e2444b22690f0865dfa4f51d5",
+    "vendor/src/equiceval/metrics.py": "d2601cbbfd37391870345c37173b2467acc908c8eb8d1439f75dc8878baf0647",
+    "vendor/src/equiceval/objective_discrepancy.py": "2f1031fa71788e9e852d9982d50f808524c4b3f69f4f327e807af647a0c641d3",
+    "vendor/src/equiceval/precheck.py": "fc31f74680743031b80b8057db815954b8c2a62ab409673a8095fea6f7271852",
+    "vendor/src/llm/__init__.py": "d593284bac60d9b40f3b94ed8e408cc1a76d8c1b86b4a63a6e8214dcd5e00325",
+    "vendor/src/llm/base.py": "9e5f11519b95b66fe79195b457704cd30a99febab7a20a11adceb22a966e229e",
+    "vendor/src/llm/bedrock.py": "b4e1accd71601aab6024cf08f1291c064061c3d46d2f3c998f7e52b3e9aff5b8",
+    "vendor/src/llm/gemini.py": "896ad6506d8ff7736cc364e6899d8ff7ec6cb84fb67b619f3a138163d0680b5a",
+    "vendor/src/llm/mock.py": "815aa5e31a51aa6d8224347292cb9f901481eda84dd7d744b56808874c6d8fe6",
+    "vendor/src/llm/ollama.py": "7c01472d33cc4e08ae79a46867c4d2dc2389faf3c01dbea37f43bd092e1d51b5",
+    "vendor/src/llm/openai_gpt.py": "27974ca396c134bfed7a78c4933e035f54b521899cd9a4b671226d0e72ce6d4c",
+    "vendor/src/llm/vllm.py": "8664e96a9f3a18bac24245e3f8094495f4882f4e24d37f33e19da5397debe129",
+    "vendor/src/prompts/__init__.py": "7609093cae3e6a2e25447aa0b6679e98e953568b5042a25d36baaf6114c6a35c",
+    "vendor/src/prompts/problems.py": "ef58ca6a3bf28a42d942fad26df69b9115fc5a889c5e266fc4115f406cf3028b",
+    "vendor/src/prompts/strategies.py": "f11dea8c0eb64713459612a337bbeb8cd90b68990d4efa11e0d1d81066c83058",
+    "vendor/src/utils/solver_wrapper.py": "ab03d838e4bd5eda66601e6c40d1206edbbb11f0fbc5089ad17eaf8072ed60c3"
+  }
+}
