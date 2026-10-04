@@ -71,8 +71,20 @@ PYTHONPATH=. .venv/bin/python -m expeval.label_oracle \
   --output data/llm_outputs_labeled.json
 ```
 
-- Dùng `src.benchmark.independent_oracle.independent_label` (liệt kê nguyên + đổi tên + bao hàm LP).
-- In ra tỉ lệ gán nhãn được. **Không** ép `None` thành đúng/sai.
+- Dùng `src.benchmark.independent_oracle.independent_label` (liệt kê nguyên + đổi tên + bao hàm LP + **bao hàm mixed-integer**).
+- In ra tỉ lệ gán nhãn được **theo family** và histogram method. **Không** ép `None` thành đúng/sai.
+
+### Gán nhãn máy — 4 tầng (theo thứ tự)
+
+1. `enumerate_oracle` — liệt kê nguyên chính xác (cùng tên, biến nguyên/nhị phân, cận hữu hạn, ≤ 100000 điểm).
+2. `_renaming_label` — song ánh đổi tên (mọi kiểu biến, ≤ 8 biến), exact.
+3. `_lp_label` — bao hàm LP hai chiều (cùng tên, scipy/HiGHS).
+4. `_mixed_integer_label` — **MILP big-M**: liệt kê biến rời rạc (≤ 4096 tổ hợp), phần liên tục giải LP, bao hàm hai chiều; witness `False` tái kiểm bằng số hữu tỉ. Dùng cho `AircraftLanding`.
+
+Trước các tầng, `_aligned_pair` chuẩn hóa tên biến candidate về tên reference theo khóa `canonical`
+(`x_1_2`/`x12` cùng khóa; `x_A1_R1`/`x11` cùng khóa) khi song ánh đầy đủ và cùng loại biến. Bounds **không**
+được so ở bước align (LLM có thể viết `e_1` là unbounded trong khi reference ghi bound dư `ub=20`);
+chính oracle bao hàm quyết định bound đó có dư hay không.
 
 ### Bước 3 — So sánh
 
@@ -108,6 +120,11 @@ RA không có verdict. Repo dùng 3 quy tắc (báo cả 3):
 - `unresolved_rate` / `unsupported_rate` vẫn ở mẫu số.
 - `n_unverified` = số nhãn `None` (không vào FPR/Recall).
 
+`data/llm_outputs_labeled.json` có thêm khối `label_coverage` (theo family + histogram
+method + `coverage`/`n_none`) để báo độ phủ thay cho κ đối với phần gán thuần máy.
+Phần `None` vá thủ công: xem `expeval.human_patch` (export sheet → 2 người chấm →
+`merge` tính Cohen κ + gộp nhãn `label_source: "human"`).
+
 ## 8. Tái lập
 
 - Ghi SHA vendor (`VENDOR.lock`) + `config` trong report.
@@ -117,13 +134,22 @@ RA không có verdict. Repo dùng 3 quy tắc (báo cả 3):
 
 ## 9. Vấn đề đã biết — cần quyết trước khi chạy RA
 
-1. **Lệch tên biến — ĐÃ xử lý.** `RAAdapter` tự chuẩn hóa tên biến candidate về tên
-   ground truth (`x1` → `x_1`, `x11` → `x_1_1`, `z_1_2` → `z12`, …) trước khi chấm,
-   nên `Cons-RMSE` lấy mẫu đúng miền GT. Test:
-   `tests/test_adapters.py::test_ra_normalizes_compact_variable_names`.
-2. **AircraftLanding** khó oracle nhất (MILP big-M) → nhiều nhãn `None`; nếu cần độ phủ
-   cao phải bổ sung quy trình gán nhãn thủ công (2 người + Cohen κ).
-3. `run_comparison` hiện gọi API tuần tự; số call = `N_model × 6 × 4`.
+1. **Lệch tên biến — ĐÃ xử lý.** `RAAdapter._normalize` chuẩn hóa cả dạng có nhãn
+   `x_A1_R1`/`x_1_1`/`x11` (prefix chữ + chuỗi chữ số) về cùng khóa, và `x_apple` giữ
+   nguyên dạng word-key. Trước khi chấm candidate được đổi tên về tên GT
+   (`x1` → `x_1`, `x_A1_R1` → `x_1_1`, `z_1_2` → `z12`, …), nên `Cons-RMSE` lấy mẫu
+   đúng miền GT. Test: `tests/test_adapters.py::test_ra_normalizes_compact_variable_names`.
+2. **AircraftLanding — ĐÃ cải thiện 2 lần.** (a) Oracle thêm tầng
+   `_mixed_integer_label` (liệt kê 2⁶=64 tổ hợp z, phần liên tục LP). (b) Engine
+   EquiCEval M1 thêm **existential projection** (xem
+   `../EquiCEval/docs/PROJECTION_EXISTENTIAL_PROPOSAL.md`): candidate một-z được
+   lift vào không gian reference khi `order_link` thành tautology → M4/M5 chạy,
+   4/5 cặp chuyển `unresolved` → `disproved` (Recall 0.167 → 0.833, FPR giữ 0).
+   Còn lại là biến thể sai encoding thật (vd khác dấu big-M) → giữ `unresolved`
+   đúng đắn. Phần `None` còn lại vá thủ công qua `expeval.human_patch`.
+3. **Tầng MILP cần cài solver.** `_mixed_integer_label` dùng scipy/HiGHS (đã có trong
+   `requirements.txt`), không phụ thuộc SCIP.
+4. `run_comparison` hiện gọi API tuần tự; số call = `N_model × 6 × 4`.
 
 ## 10. Tiêu chí nghiệm thu
 

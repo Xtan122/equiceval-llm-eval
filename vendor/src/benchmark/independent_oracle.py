@@ -19,9 +19,11 @@ verifier helper.
 """
 from __future__ import annotations
 
+import re
+from dataclasses import replace
 from fractions import Fraction
-from itertools import permutations
-from math import isfinite
+from itertools import permutations, product
+from math import ceil, floor, isfinite, prod
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
@@ -32,6 +34,8 @@ from src.equiceval.contracts import ARGMIN, FEASIBLE_SET, OBJECTIVE_AFFINE, OBJE
 
 DEFAULT_RELATIVE_TOLERANCE = 1e-7
 _EXACT_SLACK = Fraction(1, 10 ** 9)
+MILP_MAX_ASSIGNMENTS = 4096
+_INTEGER_TYPES = ("integer", "int", "binary", "bin")
 
 
 def _frac(x) -> Fraction:
@@ -120,6 +124,75 @@ def _positive_affine_details(a: Dict[str, Fraction], a_const: Fraction,
             return None
     return {"a": float(scale), "b": float(a_const - scale * b_const),
             "equation": "reference = a * candidate + b"}
+
+
+# ── 0. canonical name alignment (comparison-only, no EquiCEval mapping) ──────
+
+def _canonical_key(name: str) -> str:
+    """Case- and separator-insensitive key: ``x_1_2`` and ``x12`` both give ``x12``."""
+    return re.sub(r"[^a-z0-9]", "", name.lower())
+
+
+def _canonical_name_map(reference, candidate):
+    """Map candidate variable names onto reference names by canonical form.
+
+    Returns a dict ``candidate_name -> reference_name`` only when the mapping is a
+    complete bijection that preserves variable type. This mirrors the comparison-side
+    renaming used by the baselines but never touches the EquiCEval mapping/normalization
+    modules; it is a lexical key, not a proof of semantics. Bounds are intentionally
+    *not* compared here: an LLM may state ``e_1`` as unbounded while the reference
+    records the redundant explicit bound ``ub=20``; the containment oracle decides
+    semantic equivalence, including whether that bound is redundant.
+    """
+    ref_by_key = {}
+    for name in reference.variables:
+        key = _canonical_key(name)
+        if key in ref_by_key:
+            return None
+        ref_by_key[key] = name
+
+    mapping = {}
+    used = set()
+    for cname, cvar in candidate.variables.items():
+        rname = ref_by_key.get(_canonical_key(cname))
+        if rname is None or rname in used:
+            return None
+        rvar = reference.variables[rname]
+        if cvar.var_type.lower() != rvar.var_type.lower():
+            return None
+        mapping[cname] = rname
+        used.add(rname)
+    if len(mapping) != len(reference.variables):
+        return None
+    return mapping
+
+
+def _aligned_pair(reference, candidate):
+    """Return ``(reference, candidate)`` with candidate variables renamed to reference names.
+
+    Only renames when the canonical bijection is complete and type/bound preserving;
+    otherwise returns the original candidate (so downstream steps keep their old
+    ``None`` behaviour).
+    """
+    mapping = _canonical_name_map(reference, candidate)
+    if not mapping:
+        return reference, candidate
+    renamed_vars = {}
+    for cname, cvar in candidate.variables.items():
+        rname = mapping[cname]
+        renamed_vars[rname] = replace(cvar, name=rname)
+    renamed_constraints = [
+        replace(c, coeffs={mapping.get(v, v): a for v, a in c.coeffs.items()})
+        for c in candidate.constraints
+    ]
+    renamed_obj = {mapping.get(v, v): a for v, a in candidate.objective_coeffs.items()}
+    aligned = replace(
+        candidate,
+        variables=renamed_vars,
+        constraints=renamed_constraints,
+        objective_coeffs=renamed_obj,
+    )
+    return reference, aligned
 
 
 # ── 1. exact renaming bijection ─────────────────────────────────────────────
@@ -227,8 +300,13 @@ def _max_row(source, a, b):
     matrix, rhs, bounds = source
     res = linprog(c=[-x for x in a], A_ub=matrix if len(matrix) else None,
                   b_ub=rhs if len(rhs) else None, bounds=bounds, method="highs")
-    if res.status == 2:
+    # scipy ``linprog`` status: 0 optimal, 1 iteration limit, 2 infeasible,
+    # 3 unbounded, 4 numerical. The old code mapped 2 -> "unbounded", conflating
+    # infeasible with unbounded; keep the two apart so callers can decide.
+    if res.status == 3:
         return "unbounded", None, None
+    if res.status == 2:
+        return "infeasible", None, None
     if res.status != 0 or res.x is None:
         return "unknown", None, None
     return "ok", float(np.dot(a, res.x) + b), res.x
@@ -276,6 +354,9 @@ def _exact_violates(ir, point, names, tolerance=_EXACT_SLACK) -> bool:
 def _contains(source_ir, source_lp, target_ir, target_rows, names, tol):
     for a, b in target_rows:
         status, value, x = _max_row(source_lp, a, b)
+        if status == "infeasible":
+            # Empty source feasible set is contained in every target set.
+            return "contained", None
         if status != "ok":
             return status, None
         if value <= tol:
@@ -365,11 +446,149 @@ def _lp_label(reference, candidate, contract, tolerance=DEFAULT_RELATIVE_TOLERAN
                   "contract": contract}
 
 
+# ── 3. mixed-integer containment (enumeration over discrete vars + LP) ───────
+
+def _integer_domain(var):
+    low, high = var.lower_bound, var.upper_bound
+    if var.var_type.lower() in ("binary", "bin"):
+        low, high = max(0.0, low), min(1.0, high)
+    if not isfinite(low) or not isfinite(high):
+        return None
+    return range(ceil(low), floor(high) + 1)
+
+
+def _substitute_point(ir, assignment):
+    """Fix discrete vars at their assigned value via explicit equalities.
+
+    The returned IR keeps all variables, so ``_build_lp``/``_normalized_rows`` can
+    be reused unchanged with the full name list.
+    """
+    from src.equiceval.canonical_ir import CanonicalConstraint
+
+    fixed = [
+        CanonicalConstraint(f"fix_{name}", {name: 1.0}, -float(value), "==")
+        for name, value in assignment.items()
+    ]
+    return replace(ir, constraints=list(ir.constraints) + fixed)
+
+
+def _contains_fixed(source_ir, source_lp, target_ir, target_rows, names, tol):
+    for a, b in target_rows:
+        status, value, x = _max_row(source_lp, a, b)
+        if status == "infeasible":
+            # Empty source feasible set is contained in every target set.
+            return "contained", None
+        if status != "ok":
+            return status, None
+        if value <= tol:
+            continue
+        point = {v: float(x[i]) for i, v in enumerate(names)}
+        if _exact_feasible(source_ir, point, names) and _exact_violates(target_ir, point, names):
+            return "violated", point
+        return "unknown", None
+    return "contained", None
+
+
+def _mixed_integer_label(reference, candidate, contract, tolerance=DEFAULT_RELATIVE_TOLERANCE):
+    """Two-way containment for mixed-integer pairs with matching (aligned) names.
+
+    Discrete variables are enumerated; for each assignment both sides are solved as
+    LPs over the continuous variables. Equivalent labels are sound (both feasible
+    regions contained); not-equivalent labels carry an exact rational witness.
+    """
+    names = sorted(reference.variables)
+    if names != sorted(candidate.variables):
+        return None
+    discrete = [n for n in names
+                if reference.variables[n].var_type.lower() in _INTEGER_TYPES
+                or candidate.variables[n].var_type.lower() in _INTEGER_TYPES]
+    continuous = [n for n in names if n not in discrete]
+
+    domains = []
+    for name in discrete:
+        dref = _integer_domain(reference.variables[name])
+        dcand = _integer_domain(candidate.variables[name])
+        if dref is None or dcand is None:
+            return None
+        span = range(min(dref.start, dcand.start), max(dref.stop, dcand.stop))
+        domains.append(list(span))
+    if not domains:
+        return None
+    count = prod(len(d) for d in domains)
+    if count > MILP_MAX_ASSIGNMENTS:
+        return None, {"method": "independent_milp_containment",
+                      "reason": "assignment limit exceeded", "assignments": count}
+
+    # Confirm both sides are linear (no nonlinear metadata) before trusting LP.
+    for ir in (reference, candidate):
+        if ir.metadata.get("nonlinear") or ir.metadata.get("has_nonlinear_terms") or ir.metadata.get("unsupported_features"):
+            return None, {"method": "unavailable", "reason": "unsupported input semantics"}
+
+    has_binary = any(reference.variables[n].var_type.lower() in ("binary", "bin")
+                     or candidate.variables[n].var_type.lower() in ("binary", "bin")
+                     for n in discrete)
+    witness = None
+    checked = 0
+    for combo in product(*domains):
+        assignment = dict(zip(discrete, combo))
+        ref_fixed = _substitute_point(reference, assignment)
+        cand_fixed = _substitute_point(candidate, assignment)
+        ref_lp = _build_lp(ref_fixed, names)
+        cand_lp = _build_lp(cand_fixed, names)
+        ref_rows = _normalized_rows(ref_fixed, names)
+        cand_rows = _normalized_rows(cand_fixed, names)
+
+        status, point = _contains_fixed(reference, ref_lp, cand_fixed, cand_rows, names, tolerance)
+        if status == "violated":
+            witness = {"kind": "feasible_set", "point": {**point, **assignment}}
+            break
+        if status != "contained":
+            return None, {"method": "independent_milp_containment",
+                          "reason": "subproblem not certified"}
+        status, point = _contains_fixed(candidate, cand_lp, ref_fixed, ref_rows, names, tolerance)
+        if status == "violated":
+            witness = {"kind": "feasible_set", "point": {**point, **assignment}}
+            break
+        if status != "contained":
+            return None, {"method": "independent_milp_containment",
+                          "reason": "subproblem not certified"}
+        checked += 1
+
+    if witness is not None:
+        return False, {"method": "independent_milp_containment",
+                       "counterexample": witness, "contract": contract,
+                       "assignments_checked": checked, "has_binary": has_binary}
+
+    if contract == FEASIBLE_SET:
+        return True, {"method": "independent_milp_containment", "kind": "feasible_set",
+                      "contract": contract, "assignments": checked}
+
+    if contract in (OBJECTIVE_AFFINE, ARGMIN, OBJECTIVE_VALUE):
+        ref_obj, ref_const = _signed_objective(reference)
+        cand_obj, cand_const = _signed_objective(candidate)
+        alignment = _positive_affine_details(ref_obj, ref_const, cand_obj, cand_const)
+        if alignment is not None:
+            kind = ("positive_affine" if contract != ARGMIN
+                    else "same_argmin_certified_by_positive_affine")
+            return True, {"method": "independent_milp_containment", "objective": kind,
+                          "alignment": alignment, "contract": contract,
+                          "assignments": checked}
+        if contract == OBJECTIVE_AFFINE:
+            return False, {"method": "independent_milp_containment",
+                           "counterexample": {"kind": "objective_affine"},
+                           "contract": contract, "assignments_checked": checked}
+        return None, {"method": "independent_milp_containment",
+                      "reason": "objective not certified", "contract": contract}
+    return None, {"method": "independent_milp_containment",
+                  "reason": f"unsupported contract {contract!r}"}
+
+
 # ── entry point ─────────────────────────────────────────────────────────────
 
 def independent_label(reference, candidate, contract,
                        tolerance=DEFAULT_RELATIVE_TOLERANCE):
     """Label a pair independently; ``label`` is True/False/None (unknown)."""
+    reference, candidate = _aligned_pair(reference, candidate)
     label, evidence = enumerate_oracle(reference, candidate, contract)
     if label is not None:
         return label, evidence
@@ -379,4 +598,7 @@ def independent_label(reference, candidate, contract,
     lp = _lp_label(reference, candidate, contract, tolerance)
     if lp is not None:
         return lp
+    milp = _mixed_integer_label(reference, candidate, contract, tolerance)
+    if milp is not None:
+        return milp
     return None, evidence

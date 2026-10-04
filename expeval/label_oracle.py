@@ -13,11 +13,28 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from src.benchmark.independent_oracle import independent_label
 from src.benchmark.verified_evaluation import ir_from_dict
 from src.equiceval.contracts import PRIMARY_EQUIVAFORMULATION_CONTRACT
+
+
+def _coverage_summary(records) -> dict:
+    """Per-family label coverage and oracle-method histogram."""
+    by_family = defaultdict(lambda: Counter())
+    methods = Counter()
+    for record in records:
+        family = record.get("family") or record.get("base_problem_name") or "unknown"
+        label = record.get("label")
+        bucket = "true" if label is True else "false" if label is False else "none"
+        by_family[family][bucket] += 1
+        methods[(record.get("label_evidence") or {}).get("method", "n/a")] += 1
+    return {
+        "by_family": {fam: dict(counts) for fam, counts in sorted(by_family.items())},
+        "by_method": dict(methods.most_common()),
+    }
 
 
 def main() -> int:
@@ -41,12 +58,27 @@ def main() -> int:
         record["label_evidence"] = evidence
         labeled += 1 if label is not None else 0
 
+    coverage = _coverage_summary(records)
+    coverage["n_total"] = len(records)
+    coverage["n_labeled"] = labeled
+    coverage["n_none"] = len(records) - labeled
+    coverage["coverage"] = labeled / len(records) if records else None
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    payload = raw if not isinstance(raw, dict) else {**raw, "pairs": records}
-    if isinstance(raw, list):
+    if isinstance(raw, dict):
+        payload = {**raw, "pairs": records, "label_coverage": coverage}
+    else:
         payload = records
     args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
     print(f"Labeled {labeled}/{len(records)} pairs -> {args.output}")
+    for fam, counts in coverage["by_family"].items():
+        total = sum(counts.values())
+        got = counts.get("true", 0) + counts.get("false", 0)
+        print(f"  {fam:20s} {got}/{total} labeled "
+              f"(T={counts.get('true', 0)}, F={counts.get('false', 0)}, "
+              f"None={counts.get('none', 0)})")
+    print(f"  methods: {coverage['by_method']}")
     return 0
 
 

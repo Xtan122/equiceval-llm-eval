@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-03T08:38:15.237457+00:00",
+  "created_utc": "2026-10-03T12:04:33.646240+00:00",
   "policy": "Manual vendoring. Edit a method repo first, run its tests, then re-copy and refresh this lock.",
   "sources": {
     "equiceval": {
@@ -39,7 +39,7 @@
     "vendor/src/benchmark/baselines/reference_form.py": "869baab6479a74dd5b1a4fef8a53f54afd282b3028cedfa6113e45d9ac1ea37d",
     "vendor/src/benchmark/generator.py": "abbf67704f2a5691403946ce3c24e7958f6bfe84dfd61a8ad18ab755228a998f",
     "vendor/src/benchmark/ground_truth.py": "a0bbba4542d3349b5185c2d252260370a1c0ee83169cae216dfe821ca3939566",
-    "vendor/src/benchmark/independent_oracle.py": "fb41345fc1194d5cbbb6be7e87321184a2216d8119f7e97607b339ee450c6df6",
+    "vendor/src/benchmark/independent_oracle.py": "f2f0432778a881d0ee2fb0e7ebc0836c49467dcefacf564b5c0411b3918639ee",
     "vendor/src/benchmark/llm_ir.py": "7c111d586eb1ab2ed4bc72350a39974435d9a6c0a909193e88f11cb12d71bde7",
     "vendor/src/benchmark/llm_runner.py": "04f4d19e64e0b9f9961631560bddfd132eca1db30d7c96a1d0df473f9e46986f",
     "vendor/src/benchmark/mutator.py": "889f3ebe0a9e656e223d3a1959fc64bd327f1319c3a3c218a8f7402e3f75157e",
@@ -54,11 +54,11 @@
     "vendor/src/benchmark/witness_metrics.py": "9034abb144c701184fb095f74b1d2e23e3165a24c3ded8cf0000d33059708864",
     "vendor/src/equiceval/__init__.py": "988ad5b9e77399d19bd90cbbb98e39c6c836f60c9dc3446e6c2e57cee8ad92db",
     "vendor/src/equiceval/behavioral_discrepancy.py": "0520f53f26afcd63ba25abffd18d4a610b322802b97d3fb3ad34bba046dfe693",
-    "vendor/src/equiceval/canonical_ir.py": "820f9e1129b5d4fbb68fdb4e35194d3d778e6260db31ec3ed0283af2c698e11d",
+    "vendor/src/equiceval/canonical_ir.py": "2b4771e073014541bf8ef8c79ad164dd862ef6baf33a08366d996cef76d8de13",
     "vendor/src/equiceval/constraint_rmse.py": "1685000987b01ef8656c64904359170d3d3d12d4a183ce00c0156541185bab05",
     "vendor/src/equiceval/contracts.py": "f0f0b9d3f5e772b835ac04a9dfb00deae47bf7db9f2d0e2c1bbf1ea30138de94",
     "vendor/src/equiceval/directed_query.py": "6b13986b1d8cd30928dc3e3e7fb7fa070cf69caff264d4b0010db6be86b977e5",
-    "vendor/src/equiceval/evaluator.py": "9c41d859d44aec39096f3bce7f8602535820dde8e9a54129059a8fbf4e5b93c7",
+    "vendor/src/equiceval/evaluator.py": "3a8725bbba26eccaa93005d07c900d26c5c31b5e9813e9eebed557e72dd7e87c",
     "vendor/src/equiceval/evidence.py": "d886c6707f74389cbc8d21b0bf4341358dcbc7226a76b05c25b08dbce2ca8e94",
     "vendor/src/equiceval/matching.py": "acea724c3f28b8fa0792be96773630648c5ca83e2444b22690f0865dfa4f51d5",
     "vendor/src/equiceval/metrics.py": "d2601cbbfd37391870345c37173b2467acc908c8eb8d1439f75dc8878baf0647",

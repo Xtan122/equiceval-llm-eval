@@ -28,25 +28,48 @@ PYTHONPATH=. .venv/bin/python -m pytest tests -q
 
 ## Run
 
+`PYTHONPATH` must include both the experiment repo (`.`) and the vendored method
+tree (`vendor`).
+
 ```bash
-# 1. Generate candidates with a real LLM (Bedrock / Ollama / OpenAI / vLLM)
-PYTHONPATH=. .venv/bin/python -m expeval.generate_llm_outputs \
-  --model bedrock-gpt --problem Knapsack Diet --prompt P1 P2 \
+# 1. Generate candidates with a real LLM (Bedrock / Ollama / OpenAI / vLLM).
+#    gpt-oss-120B lives in us-east-1 (not the default ap-southeast-1).
+PYTHONPATH=.:vendor AWS_DEFAULT_REGION=us-east-1 .venv/bin/python -m expeval.generate_llm_outputs \
+  --model bedrock-gpt --problem Knapsack AircraftAssignment Diet AircraftLanding \
+  --prompt P1 P2 P3 P4 P5 P6 \
   --output data/llm_outputs_raw.json
 
-# 2. Label them independently (True / False / null)
-PYTHONPATH=. .venv/bin/python -m expeval.label_oracle \
+# 2. Label them independently (True / False / null); prints per-family coverage
+PYTHONPATH=.:vendor .venv/bin/python -m expeval.label_oracle \
   --pairs data/llm_outputs_raw.json \
   --contract feasible_set_and_objective_affine \
   --output data/llm_outputs_labeled.json
 
 # 3. Compare RA vs EquiCEval
-PYTHONPATH=. .venv/bin/python -m expeval.run_comparison \
+PYTHONPATH=.:vendor .venv/bin/python -m expeval.run_comparison \
   --pairs data/llm_outputs_labeled.json \
   --contract feasible_set_and_objective_affine \
   --ra-rule primary \
   --output output/llm_eval_report.json
+
+# 4. (optional) human patch + Cohen kappa for residual None labels
+PYTHONPATH=.:vendor .venv/bin/python -m expeval.human_patch export \
+  --pairs data/llm_outputs_labeled.json --output data/human_patch_sheet.json
+PYTHONPATH=.:vendor .venv/bin/python -m expeval.human_patch merge \
+  --pairs data/llm_outputs_labeled.json --sheet data/human_patch_sheet.json \
+  --output data/llm_outputs_labeled_patched.json
 ```
+
+The machine oracle has four independent tiers: exact integer enumeration, exact
+variable-renaming bijection, LP containment, and (new) mixed-integer containment
+that enumerates discrete variables and solves the continuous part as an LP.
+`None` means "not provable", never "not equivalent".
+
+On the EquiCEval side, M1 now supports **existential projection** of auxiliary
+variables (a candidate that encodes the same problem with fewer/more auxiliaries
+than the reference). This lifts single-ordering-binary candidates into the
+reference space when `order_link` rows become tautologies, so M4/M5 can run.
+Proposal and results: `../EquiCEval/docs/PROJECTION_EXISTENTIAL_PROPOSAL.md`.
 
 `data/sample_pairs.json` is a small labelled smoke set (not LLM output) used by
 the tests and for an offline dry run.
@@ -67,6 +90,7 @@ solver-only` uses only the optimality gap.
 
 - `vendor/src/` — vendored EquiCEval engine, RA baseline, LLM layer.
 - `expeval/adapters/` — `Pair`/`Decision` interface, EquiCEval and RA adapters.
-- `expeval/label_oracle.py` — independent labelling.
+- `expeval/label_oracle.py` — independent labelling + per-family coverage summary.
 - `expeval/run_comparison.py` — FPR / Recall (+ unresolved/unsupported rates).
+- `expeval/human_patch.py` — residual-`None` annotation sheet + Cohen kappa merge.
 - `VENDOR.lock` — vendored file hashes.

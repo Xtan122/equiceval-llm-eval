@@ -251,7 +251,11 @@ class EquiCEvalEvaluator:
         # candidate coordinates before checking the original candidate model.
         out.mapping["diagnostic_coordinate_space"] = "reference"
         out.mapping["coverage_semantics"] = "locally verified pairs retained before failure; partial coverage is a lower bound"
-        out.var_match_score = (len(set(cert.variable_map.values())) / len(gt_ir.variables)
+        # Coverage counts mapped reference variables AND reference variables
+        # recovered by verified elimination (e.g. z_ji = 1 - z_ij); both are
+        # covered in the projected space.
+        covered = set(cert.variable_map.values()) | set(cert.ref_eliminations)
+        out.var_match_score = (len(covered) / len(gt_ir.variables)
                                if gt_ir.variables else float("nan"))
         if not cert.is_verified:
             out.verdict = "unsupported" if cert.unsupported_features else "unresolved"

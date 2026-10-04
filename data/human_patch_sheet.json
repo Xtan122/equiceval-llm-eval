@@ -1,0 +1,3552 @@
+{
+  "instructions": "Label each (reference, candidate) pair: true = the two formulations are equivalent under the contract feasible_set_and_objective_affine (same feasible set and objective equal up to positive scaling); false = they are not; null = cannot decide. Annotators must work independently and not consult EquiCEval or RA outputs.",
+  "contract": "feasible_set_and_objective_affine",
+  "items": [
+    {
+      "pair_id": "llm_bedrock-gpt_AircraftLanding_P1",
+      "family": "AircraftLanding",
+      "model": null,
+      "prompt": null,
+      "machine_evidence": {
+        "method": "unavailable",
+        "reason": "identity coordinates required"
+      },
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "variables": {
+          "x1": {
+            "name": "x1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "land_time_A1",
+            "requirement_id": "al_x1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x2": {
+            "name": "x2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "land_time_A2",
+            "requirement_id": "al_x2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x3": {
+            "name": "x3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "land_time_A3",
+            "requirement_id": "al_x3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e1": {
+            "name": "e1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A1",
+            "requirement_id": "al_e1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e2": {
+            "name": "e2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A2",
+            "requirement_id": "al_e2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e3": {
+            "name": "e3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A3",
+            "requirement_id": "al_e3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l1": {
+            "name": "l1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A1",
+            "requirement_id": "al_l1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l2": {
+            "name": "l2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A2",
+            "requirement_id": "al_l2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l3": {
+            "name": "l3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A3",
+            "requirement_id": "al_l3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z12": {
+            "name": "z12",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A2",
+            "requirement_id": "al_z12",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z21": {
+            "name": "z21",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A1",
+            "requirement_id": "al_z21",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z13": {
+            "name": "z13",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A3",
+            "requirement_id": "al_z13",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z31": {
+            "name": "z31",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A1",
+            "requirement_id": "al_z31",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z23": {
+            "name": "z23",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A3",
+            "requirement_id": "al_z23",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z32": {
+            "name": "z32",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A2",
+            "requirement_id": "al_z32",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "land_def_1",
+            "coeffs": {
+              "x1": 1.0,
+              "l1": -1.0,
+              "e1": 1.0
+            },
+            "constant": -4.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_2",
+            "coeffs": {
+              "x2": 1.0,
+              "l2": -1.0,
+              "e2": 1.0
+            },
+            "constant": -8.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_3",
+            "coeffs": {
+              "x3": 1.0,
+              "l3": -1.0,
+              "e3": 1.0
+            },
+            "constant": -14.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x2": 1.0,
+              "z12": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_bwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x1": 1.0,
+              "z21": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x3": 1.0,
+              "z13": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x1": 1.0,
+              "z31": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_fwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x3": 1.0,
+              "z23": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x2": 1.0,
+              "z32": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_12",
+            "coeffs": {
+              "z12": 1.0,
+              "z21": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_13",
+            "coeffs": {
+              "z13": 1.0,
+              "z31": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_23",
+            "coeffs": {
+              "z23": 1.0,
+              "z32": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e1": 5.0,
+          "l1": 10.0,
+          "e2": 10.0,
+          "l2": 20.0,
+          "e3": 15.0,
+          "l3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "name_aliases": {
+            "x_1": "x1",
+            "x_2": "x2",
+            "x_3": "x3",
+            "e_1": "e1",
+            "e_2": "e2",
+            "e_3": "e3",
+            "l_1": "l1",
+            "l_2": "l2",
+            "l_3": "l3",
+            "z_12": "z12",
+            "z_1_2": "z12",
+            "z_2_1": "z21",
+            "z_13": "z13",
+            "z_1_3": "z13",
+            "z_3_1": "z31",
+            "z_23": "z23",
+            "z_2_3": "z23",
+            "z_3_2": "z32"
+          },
+          "family_label": "AircraftLanding",
+          "difficulty": "Hard",
+          "opt_type": "MILP"
+        }
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_LLM",
+        "variables": {
+          "x_A1": {
+            "name": "x_A1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_A2": {
+            "name": "x_A2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_A3": {
+            "name": "x_A3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_A1": {
+            "name": "e_A1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_A1": {
+            "name": "l_A1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_A2": {
+            "name": "e_A2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_A2": {
+            "name": "l_A2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_A3": {
+            "name": "e_A3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_A3": {
+            "name": "l_A3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_A1_A2": {
+            "name": "z_A1_A2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_A1_A3": {
+            "name": "z_A1_A3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_A2_A3": {
+            "name": "z_A2_A3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "c0",
+            "coeffs": {
+              "x_A1": -1.0
+            },
+            "constant": 1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c1",
+            "coeffs": {
+              "x_A1": 1.0
+            },
+            "constant": -10.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c2",
+            "coeffs": {
+              "x_A2": -1.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c3",
+            "coeffs": {
+              "x_A2": 1.0
+            },
+            "constant": -12.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c4",
+            "coeffs": {
+              "x_A3": -1.0
+            },
+            "constant": 5.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c5",
+            "coeffs": {
+              "x_A3": 1.0
+            },
+            "constant": -15.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c6",
+            "coeffs": {
+              "e_A1": -1.0,
+              "x_A1": 1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c7",
+            "coeffs": {
+              "e_A2": -1.0,
+              "x_A2": 1.0
+            },
+            "constant": 8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c8",
+            "coeffs": {
+              "e_A3": -1.0,
+              "x_A3": 1.0
+            },
+            "constant": 14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c9",
+            "coeffs": {
+              "l_A1": -1.0,
+              "x_A1": 1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c10",
+            "coeffs": {
+              "l_A2": -1.0,
+              "x_A2": 1.0
+            },
+            "constant": -8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c11",
+            "coeffs": {
+              "l_A3": -1.0,
+              "x_A3": 1.0
+            },
+            "constant": -14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c12",
+            "coeffs": {
+              "x_A2": -1.0,
+              "x_A1": 1.0,
+              "z_A1_A2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c13",
+            "coeffs": {
+              "x_A1": -1.0,
+              "x_A2": 1.0,
+              "z_A1_A2": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c14",
+            "coeffs": {
+              "x_A3": -1.0,
+              "x_A1": 1.0,
+              "z_A1_A3": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c15",
+            "coeffs": {
+              "x_A1": -1.0,
+              "x_A3": 1.0,
+              "z_A1_A3": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c16",
+            "coeffs": {
+              "x_A3": -1.0,
+              "x_A2": 1.0,
+              "z_A2_A3": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c17",
+            "coeffs": {
+              "x_A2": -1.0,
+              "x_A3": 1.0,
+              "z_A2_A3": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_A1": 5.0,
+          "l_A1": 10.0,
+          "e_A2": 10.0,
+          "l_A2": 20.0,
+          "e_A3": 15.0,
+          "l_A3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "source": "llm_output"
+        }
+      },
+      "annotator_1": "false",
+      "annotator_2": "false",
+      "adjudicated": "false",
+      "note": "candidate encodes earliness/lateness as one-sided x-e<=T and x-l<=<=-T, over/under-constraining vs reference land_def x-l+e=T; exact witness found"
+    },
+    {
+      "pair_id": "llm_bedrock-gpt_AircraftLanding_P2",
+      "family": "AircraftLanding",
+      "model": null,
+      "prompt": null,
+      "machine_evidence": {
+        "method": "unavailable",
+        "reason": "identity coordinates required"
+      },
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "variables": {
+          "x1": {
+            "name": "x1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "land_time_A1",
+            "requirement_id": "al_x1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x2": {
+            "name": "x2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "land_time_A2",
+            "requirement_id": "al_x2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x3": {
+            "name": "x3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "land_time_A3",
+            "requirement_id": "al_x3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e1": {
+            "name": "e1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A1",
+            "requirement_id": "al_e1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e2": {
+            "name": "e2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A2",
+            "requirement_id": "al_e2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e3": {
+            "name": "e3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A3",
+            "requirement_id": "al_e3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l1": {
+            "name": "l1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A1",
+            "requirement_id": "al_l1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l2": {
+            "name": "l2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A2",
+            "requirement_id": "al_l2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l3": {
+            "name": "l3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A3",
+            "requirement_id": "al_l3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z12": {
+            "name": "z12",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A2",
+            "requirement_id": "al_z12",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z21": {
+            "name": "z21",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A1",
+            "requirement_id": "al_z21",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z13": {
+            "name": "z13",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A3",
+            "requirement_id": "al_z13",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z31": {
+            "name": "z31",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A1",
+            "requirement_id": "al_z31",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z23": {
+            "name": "z23",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A3",
+            "requirement_id": "al_z23",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z32": {
+            "name": "z32",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A2",
+            "requirement_id": "al_z32",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "land_def_1",
+            "coeffs": {
+              "x1": 1.0,
+              "l1": -1.0,
+              "e1": 1.0
+            },
+            "constant": -4.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_2",
+            "coeffs": {
+              "x2": 1.0,
+              "l2": -1.0,
+              "e2": 1.0
+            },
+            "constant": -8.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_3",
+            "coeffs": {
+              "x3": 1.0,
+              "l3": -1.0,
+              "e3": 1.0
+            },
+            "constant": -14.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x2": 1.0,
+              "z12": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_bwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x1": 1.0,
+              "z21": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x3": 1.0,
+              "z13": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x1": 1.0,
+              "z31": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_fwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x3": 1.0,
+              "z23": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x2": 1.0,
+              "z32": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_12",
+            "coeffs": {
+              "z12": 1.0,
+              "z21": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_13",
+            "coeffs": {
+              "z13": 1.0,
+              "z31": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_23",
+            "coeffs": {
+              "z23": 1.0,
+              "z32": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e1": 5.0,
+          "l1": 10.0,
+          "e2": 10.0,
+          "l2": 20.0,
+          "e3": 15.0,
+          "l3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "name_aliases": {
+            "x_1": "x1",
+            "x_2": "x2",
+            "x_3": "x3",
+            "e_1": "e1",
+            "e_2": "e2",
+            "e_3": "e3",
+            "l_1": "l1",
+            "l_2": "l2",
+            "l_3": "l3",
+            "z_12": "z12",
+            "z_1_2": "z12",
+            "z_2_1": "z21",
+            "z_13": "z13",
+            "z_1_3": "z13",
+            "z_3_1": "z31",
+            "z_23": "z23",
+            "z_2_3": "z23",
+            "z_3_2": "z32"
+          },
+          "family_label": "AircraftLanding",
+          "difficulty": "Hard",
+          "opt_type": "MILP"
+        }
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_LLM",
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_12": {
+            "name": "z_12",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_13": {
+            "name": "z_13",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_23": {
+            "name": "z_23",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "c0",
+            "coeffs": {
+              "x_1": -1.0
+            },
+            "constant": 1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c1",
+            "coeffs": {
+              "x_1": 1.0
+            },
+            "constant": -10.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c2",
+            "coeffs": {
+              "x_2": -1.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c3",
+            "coeffs": {
+              "x_2": 1.0
+            },
+            "constant": -12.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c4",
+            "coeffs": {
+              "x_3": -1.0
+            },
+            "constant": 5.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c5",
+            "coeffs": {
+              "x_3": 1.0
+            },
+            "constant": -15.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c6",
+            "coeffs": {
+              "x_1": 1.0,
+              "e_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c7",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c8",
+            "coeffs": {
+              "x_2": 1.0,
+              "e_2": -1.0
+            },
+            "constant": 8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c9",
+            "coeffs": {
+              "x_2": 1.0,
+              "l_2": -1.0
+            },
+            "constant": -8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c10",
+            "coeffs": {
+              "x_3": 1.0,
+              "e_3": -1.0
+            },
+            "constant": 14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c11",
+            "coeffs": {
+              "x_3": 1.0,
+              "l_3": -1.0
+            },
+            "constant": -14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c12",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_2": -1.0,
+              "z_12": -1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c13",
+            "coeffs": {
+              "x_1": -1.0,
+              "x_2": 1.0,
+              "z_12": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c14",
+            "coeffs": {
+              "x_1": 1.0,
+              "x_3": -1.0,
+              "z_13": -1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c15",
+            "coeffs": {
+              "x_1": -1.0,
+              "x_3": 1.0,
+              "z_13": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c16",
+            "coeffs": {
+              "x_2": 1.0,
+              "x_3": -1.0,
+              "z_23": -1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c17",
+            "coeffs": {
+              "x_2": -1.0,
+              "x_3": 1.0,
+              "z_23": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "source": "llm_output"
+        }
+      },
+      "annotator_1": "false",
+      "annotator_2": "false",
+      "adjudicated": "false",
+      "note": "candidate c7 x1-l1<=-4 => l1>=x1+4 (wrong lateness sign); ref requires l1>=x1-4. Exact counterexample (x1=10,l1=6,e1=0) feasible in ref, violates candidate"
+    },
+    {
+      "pair_id": "llm_bedrock-gpt_AircraftLanding_P4",
+      "family": "AircraftLanding",
+      "model": null,
+      "prompt": null,
+      "machine_evidence": {
+        "method": "unavailable",
+        "reason": "identity coordinates required"
+      },
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "variables": {
+          "x1": {
+            "name": "x1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "land_time_A1",
+            "requirement_id": "al_x1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x2": {
+            "name": "x2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "land_time_A2",
+            "requirement_id": "al_x2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x3": {
+            "name": "x3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "land_time_A3",
+            "requirement_id": "al_x3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e1": {
+            "name": "e1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A1",
+            "requirement_id": "al_e1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e2": {
+            "name": "e2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A2",
+            "requirement_id": "al_e2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e3": {
+            "name": "e3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A3",
+            "requirement_id": "al_e3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l1": {
+            "name": "l1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A1",
+            "requirement_id": "al_l1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l2": {
+            "name": "l2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A2",
+            "requirement_id": "al_l2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l3": {
+            "name": "l3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A3",
+            "requirement_id": "al_l3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z12": {
+            "name": "z12",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A2",
+            "requirement_id": "al_z12",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z21": {
+            "name": "z21",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A1",
+            "requirement_id": "al_z21",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z13": {
+            "name": "z13",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A3",
+            "requirement_id": "al_z13",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z31": {
+            "name": "z31",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A1",
+            "requirement_id": "al_z31",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z23": {
+            "name": "z23",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A3",
+            "requirement_id": "al_z23",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z32": {
+            "name": "z32",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A2",
+            "requirement_id": "al_z32",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "land_def_1",
+            "coeffs": {
+              "x1": 1.0,
+              "l1": -1.0,
+              "e1": 1.0
+            },
+            "constant": -4.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_2",
+            "coeffs": {
+              "x2": 1.0,
+              "l2": -1.0,
+              "e2": 1.0
+            },
+            "constant": -8.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_3",
+            "coeffs": {
+              "x3": 1.0,
+              "l3": -1.0,
+              "e3": 1.0
+            },
+            "constant": -14.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x2": 1.0,
+              "z12": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_bwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x1": 1.0,
+              "z21": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x3": 1.0,
+              "z13": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x1": 1.0,
+              "z31": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_fwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x3": 1.0,
+              "z23": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x2": 1.0,
+              "z32": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_12",
+            "coeffs": {
+              "z12": 1.0,
+              "z21": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_13",
+            "coeffs": {
+              "z13": 1.0,
+              "z31": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_23",
+            "coeffs": {
+              "z23": 1.0,
+              "z32": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e1": 5.0,
+          "l1": 10.0,
+          "e2": 10.0,
+          "l2": 20.0,
+          "e3": 15.0,
+          "l3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "name_aliases": {
+            "x_1": "x1",
+            "x_2": "x2",
+            "x_3": "x3",
+            "e_1": "e1",
+            "e_2": "e2",
+            "e_3": "e3",
+            "l_1": "l1",
+            "l_2": "l2",
+            "l_3": "l3",
+            "z_12": "z12",
+            "z_1_2": "z12",
+            "z_2_1": "z21",
+            "z_13": "z13",
+            "z_1_3": "z13",
+            "z_3_1": "z31",
+            "z_23": "z23",
+            "z_2_3": "z23",
+            "z_3_2": "z32"
+          },
+          "family_label": "AircraftLanding",
+          "difficulty": "Hard",
+          "opt_type": "MILP"
+        }
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_LLM",
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_12": {
+            "name": "z_12",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_13": {
+            "name": "z_13",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_23": {
+            "name": "z_23",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "c0",
+            "coeffs": {
+              "x_1": -1.0
+            },
+            "constant": 1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c1",
+            "coeffs": {
+              "x_1": 1.0
+            },
+            "constant": -10.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c2",
+            "coeffs": {
+              "x_2": -1.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c3",
+            "coeffs": {
+              "x_2": 1.0
+            },
+            "constant": -12.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c4",
+            "coeffs": {
+              "x_3": -1.0
+            },
+            "constant": 5.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c5",
+            "coeffs": {
+              "x_3": 1.0
+            },
+            "constant": -15.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c6",
+            "coeffs": {
+              "e_1": -1.0,
+              "x_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c7",
+            "coeffs": {
+              "l_1": -1.0,
+              "x_1": 1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c8",
+            "coeffs": {
+              "e_2": -1.0,
+              "x_2": -1.0
+            },
+            "constant": 8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c9",
+            "coeffs": {
+              "l_2": -1.0,
+              "x_2": 1.0
+            },
+            "constant": -8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c10",
+            "coeffs": {
+              "e_3": -1.0,
+              "x_3": -1.0
+            },
+            "constant": 14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c11",
+            "coeffs": {
+              "l_3": -1.0,
+              "x_3": 1.0
+            },
+            "constant": -14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c12",
+            "coeffs": {
+              "x_2": -1.0,
+              "x_1": 1.0,
+              "z_12": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c13",
+            "coeffs": {
+              "x_1": -1.0,
+              "x_2": 1.0,
+              "z_12": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c14",
+            "coeffs": {
+              "x_3": -1.0,
+              "x_1": 1.0,
+              "z_13": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c15",
+            "coeffs": {
+              "x_1": -1.0,
+              "x_3": 1.0,
+              "z_13": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c16",
+            "coeffs": {
+              "x_3": -1.0,
+              "x_2": 1.0,
+              "z_23": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c17",
+            "coeffs": {
+              "x_2": -1.0,
+              "x_3": 1.0,
+              "z_23": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "source": "llm_output"
+        }
+      },
+      "annotator_1": "false",
+      "annotator_2": "false",
+      "adjudicated": "false",
+      "note": "candidate earliness -e1-x1<=4 is vacuous (e1>=-x1-4) and lateness l1>=x1+4 wrong; exact counterexample"
+    },
+    {
+      "pair_id": "llm_bedrock-gpt_AircraftLanding_P5",
+      "family": "AircraftLanding",
+      "model": null,
+      "prompt": null,
+      "machine_evidence": {
+        "method": "unavailable",
+        "reason": "identity coordinates required"
+      },
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "variables": {
+          "x1": {
+            "name": "x1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "land_time_A1",
+            "requirement_id": "al_x1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x2": {
+            "name": "x2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "land_time_A2",
+            "requirement_id": "al_x2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x3": {
+            "name": "x3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "land_time_A3",
+            "requirement_id": "al_x3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e1": {
+            "name": "e1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A1",
+            "requirement_id": "al_e1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e2": {
+            "name": "e2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A2",
+            "requirement_id": "al_e2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e3": {
+            "name": "e3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A3",
+            "requirement_id": "al_e3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l1": {
+            "name": "l1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A1",
+            "requirement_id": "al_l1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l2": {
+            "name": "l2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A2",
+            "requirement_id": "al_l2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l3": {
+            "name": "l3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A3",
+            "requirement_id": "al_l3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z12": {
+            "name": "z12",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A2",
+            "requirement_id": "al_z12",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z21": {
+            "name": "z21",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A1",
+            "requirement_id": "al_z21",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z13": {
+            "name": "z13",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A3",
+            "requirement_id": "al_z13",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z31": {
+            "name": "z31",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A1",
+            "requirement_id": "al_z31",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z23": {
+            "name": "z23",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A3",
+            "requirement_id": "al_z23",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z32": {
+            "name": "z32",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A2",
+            "requirement_id": "al_z32",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "land_def_1",
+            "coeffs": {
+              "x1": 1.0,
+              "l1": -1.0,
+              "e1": 1.0
+            },
+            "constant": -4.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_2",
+            "coeffs": {
+              "x2": 1.0,
+              "l2": -1.0,
+              "e2": 1.0
+            },
+            "constant": -8.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_3",
+            "coeffs": {
+              "x3": 1.0,
+              "l3": -1.0,
+              "e3": 1.0
+            },
+            "constant": -14.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x2": 1.0,
+              "z12": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_bwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x1": 1.0,
+              "z21": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x3": 1.0,
+              "z13": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x1": 1.0,
+              "z31": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_fwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x3": 1.0,
+              "z23": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x2": 1.0,
+              "z32": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_12",
+            "coeffs": {
+              "z12": 1.0,
+              "z21": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_13",
+            "coeffs": {
+              "z13": 1.0,
+              "z31": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_23",
+            "coeffs": {
+              "z23": 1.0,
+              "z32": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e1": 5.0,
+          "l1": 10.0,
+          "e2": 10.0,
+          "l2": 20.0,
+          "e3": 15.0,
+          "l3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "name_aliases": {
+            "x_1": "x1",
+            "x_2": "x2",
+            "x_3": "x3",
+            "e_1": "e1",
+            "e_2": "e2",
+            "e_3": "e3",
+            "l_1": "l1",
+            "l_2": "l2",
+            "l_3": "l3",
+            "z_12": "z12",
+            "z_1_2": "z12",
+            "z_2_1": "z21",
+            "z_13": "z13",
+            "z_1_3": "z13",
+            "z_3_1": "z31",
+            "z_23": "z23",
+            "z_2_3": "z23",
+            "z_3_2": "z32"
+          },
+          "family_label": "AircraftLanding",
+          "difficulty": "Hard",
+          "opt_type": "MILP"
+        }
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_LLM",
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "c0",
+            "coeffs": {
+              "x_1": -1.0
+            },
+            "constant": 1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c1",
+            "coeffs": {
+              "x_1": 1.0
+            },
+            "constant": -10.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c2",
+            "coeffs": {
+              "x_2": -1.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c3",
+            "coeffs": {
+              "x_2": 1.0
+            },
+            "constant": -12.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c4",
+            "coeffs": {
+              "x_3": -1.0
+            },
+            "constant": 5.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c5",
+            "coeffs": {
+              "x_3": 1.0
+            },
+            "constant": -15.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c6",
+            "coeffs": {
+              "e_1": -1.0,
+              "x_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c7",
+            "coeffs": {
+              "e_2": -1.0,
+              "x_2": -1.0
+            },
+            "constant": 8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c8",
+            "coeffs": {
+              "e_3": -1.0,
+              "x_3": -1.0
+            },
+            "constant": 14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c9",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c10",
+            "coeffs": {
+              "x_2": 1.0,
+              "l_2": -1.0
+            },
+            "constant": -8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c11",
+            "coeffs": {
+              "x_3": 1.0,
+              "l_3": -1.0
+            },
+            "constant": -14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c12",
+            "coeffs": {
+              "x_2": -1.0,
+              "x_1": 1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c13",
+            "coeffs": {
+              "x_1": -1.0,
+              "x_2": 1.0,
+              "z_1_2": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c14",
+            "coeffs": {
+              "x_3": -1.0,
+              "x_1": 1.0,
+              "z_1_3": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c15",
+            "coeffs": {
+              "x_1": -1.0,
+              "x_3": 1.0,
+              "z_1_3": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c16",
+            "coeffs": {
+              "x_3": -1.0,
+              "x_2": 1.0,
+              "z_2_3": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c17",
+            "coeffs": {
+              "x_2": -1.0,
+              "x_3": 1.0,
+              "z_2_3": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "source": "llm_output"
+        }
+      },
+      "annotator_1": "false",
+      "annotator_2": "false",
+      "adjudicated": "false",
+      "note": "same lateness encoding error as P2/P4; exact counterexample feasible in ref, violates candidate"
+    },
+    {
+      "pair_id": "llm_bedrock-gpt_AircraftLanding_P6",
+      "family": "AircraftLanding",
+      "model": null,
+      "prompt": null,
+      "machine_evidence": {
+        "method": "unavailable",
+        "reason": "identity coordinates required"
+      },
+      "reference_ir": {
+        "problem_name": "AircraftLanding",
+        "variables": {
+          "x1": {
+            "name": "x1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "land_time_A1",
+            "requirement_id": "al_x1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x2": {
+            "name": "x2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "land_time_A2",
+            "requirement_id": "al_x2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x3": {
+            "name": "x3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "land_time_A3",
+            "requirement_id": "al_x3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e1": {
+            "name": "e1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A1",
+            "requirement_id": "al_e1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e2": {
+            "name": "e2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A2",
+            "requirement_id": "al_e2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e3": {
+            "name": "e3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "early_A3",
+            "requirement_id": "al_e3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l1": {
+            "name": "l1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A1",
+            "requirement_id": "al_l1",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l2": {
+            "name": "l2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A2",
+            "requirement_id": "al_l2",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l3": {
+            "name": "l3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": 20.0,
+            "provenance": "",
+            "semantic_role": "late_A3",
+            "requirement_id": "al_l3",
+            "unit": "min",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z12": {
+            "name": "z12",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A2",
+            "requirement_id": "al_z12",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z21": {
+            "name": "z21",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A1",
+            "requirement_id": "al_z21",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z13": {
+            "name": "z13",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A1_A3",
+            "requirement_id": "al_z13",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z31": {
+            "name": "z31",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A1",
+            "requirement_id": "al_z31",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z23": {
+            "name": "z23",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A2_A3",
+            "requirement_id": "al_z23",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z32": {
+            "name": "z32",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "order_A3_A2",
+            "requirement_id": "al_z32",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "land_def_1",
+            "coeffs": {
+              "x1": 1.0,
+              "l1": -1.0,
+              "e1": 1.0
+            },
+            "constant": -4.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_2",
+            "coeffs": {
+              "x2": 1.0,
+              "l2": -1.0,
+              "e2": 1.0
+            },
+            "constant": -8.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "land_def_3",
+            "coeffs": {
+              "x3": 1.0,
+              "l3": -1.0,
+              "e3": 1.0
+            },
+            "constant": -14.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x2": 1.0,
+              "z12": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep12_bwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x1": 1.0,
+              "z21": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_fwd",
+            "coeffs": {
+              "x1": -1.0,
+              "x3": 1.0,
+              "z13": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep13_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x1": 1.0,
+              "z31": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_fwd",
+            "coeffs": {
+              "x2": -1.0,
+              "x3": 1.0,
+              "z23": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "sep23_bwd",
+            "coeffs": {
+              "x3": -1.0,
+              "x2": 1.0,
+              "z32": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_12",
+            "coeffs": {
+              "z12": 1.0,
+              "z21": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_13",
+            "coeffs": {
+              "z13": 1.0,
+              "z31": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "order_link_23",
+            "coeffs": {
+              "z23": 1.0,
+              "z32": 1.0
+            },
+            "constant": -1.0,
+            "sense": "==",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e1": 5.0,
+          "l1": 10.0,
+          "e2": 10.0,
+          "l2": 20.0,
+          "e3": 15.0,
+          "l3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "name_aliases": {
+            "x_1": "x1",
+            "x_2": "x2",
+            "x_3": "x3",
+            "e_1": "e1",
+            "e_2": "e2",
+            "e_3": "e3",
+            "l_1": "l1",
+            "l_2": "l2",
+            "l_3": "l3",
+            "z_12": "z12",
+            "z_1_2": "z12",
+            "z_2_1": "z21",
+            "z_13": "z13",
+            "z_1_3": "z13",
+            "z_3_1": "z31",
+            "z_23": "z23",
+            "z_2_3": "z23",
+            "z_3_2": "z32"
+          },
+          "family_label": "AircraftLanding",
+          "difficulty": "Hard",
+          "opt_type": "MILP"
+        }
+      },
+      "candidate_ir": {
+        "problem_name": "AircraftLanding_LLM",
+        "variables": {
+          "x_1": {
+            "name": "x_1",
+            "var_type": "continuous",
+            "lower_bound": 1.0,
+            "upper_bound": 10.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_2": {
+            "name": "x_2",
+            "var_type": "continuous",
+            "lower_bound": 3.0,
+            "upper_bound": 12.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "x_3": {
+            "name": "x_3",
+            "var_type": "continuous",
+            "lower_bound": 5.0,
+            "upper_bound": 15.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_1": {
+            "name": "e_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_2": {
+            "name": "e_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "e_3": {
+            "name": "e_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_1": {
+            "name": "l_1",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_2": {
+            "name": "l_2",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "l_3": {
+            "name": "l_3",
+            "var_type": "continuous",
+            "lower_bound": 0.0,
+            "upper_bound": "inf",
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_1_2": {
+            "name": "z_1_2",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_1_3": {
+            "name": "z_1_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          },
+          "z_2_3": {
+            "name": "z_2_3",
+            "var_type": "binary",
+            "lower_bound": 0.0,
+            "upper_bound": 1.0,
+            "provenance": "",
+            "semantic_role": "",
+            "requirement_id": "",
+            "unit": "",
+            "is_auxiliary": false,
+            "index_sets": []
+          }
+        },
+        "constraints": [
+          {
+            "name": "c0",
+            "coeffs": {
+              "x_1": -1.0
+            },
+            "constant": 1.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c1",
+            "coeffs": {
+              "x_2": -1.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c2",
+            "coeffs": {
+              "x_3": -1.0
+            },
+            "constant": 5.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c3",
+            "coeffs": {
+              "x_1": 1.0
+            },
+            "constant": -10.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c4",
+            "coeffs": {
+              "x_2": 1.0
+            },
+            "constant": -12.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c5",
+            "coeffs": {
+              "x_3": 1.0
+            },
+            "constant": -15.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c6",
+            "coeffs": {
+              "e_1": -1.0,
+              "x_1": -1.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c7",
+            "coeffs": {
+              "e_2": -1.0,
+              "x_2": -1.0
+            },
+            "constant": 8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c8",
+            "coeffs": {
+              "e_3": -1.0,
+              "x_3": -1.0
+            },
+            "constant": 14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c9",
+            "coeffs": {
+              "x_1": 1.0,
+              "l_1": -1.0
+            },
+            "constant": -4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c10",
+            "coeffs": {
+              "x_2": 1.0,
+              "l_2": -1.0
+            },
+            "constant": -8.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c11",
+            "coeffs": {
+              "x_3": 1.0,
+              "l_3": -1.0
+            },
+            "constant": -14.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c12",
+            "coeffs": {
+              "x_2": -1.0,
+              "x_1": 1.0,
+              "z_1_2": 1000.0
+            },
+            "constant": -998.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c13",
+            "coeffs": {
+              "x_1": -1.0,
+              "x_2": 1.0,
+              "z_1_2": -1000.0
+            },
+            "constant": 2.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c14",
+            "coeffs": {
+              "x_3": -1.0,
+              "x_1": 1.0,
+              "z_1_3": 1000.0
+            },
+            "constant": -997.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c15",
+            "coeffs": {
+              "x_1": -1.0,
+              "x_3": 1.0,
+              "z_1_3": -1000.0
+            },
+            "constant": 3.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c16",
+            "coeffs": {
+              "x_3": -1.0,
+              "x_2": 1.0,
+              "z_2_3": 1000.0
+            },
+            "constant": -996.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          },
+          {
+            "name": "c17",
+            "coeffs": {
+              "x_2": -1.0,
+              "x_3": 1.0,
+              "z_2_3": -1000.0
+            },
+            "constant": 4.0,
+            "sense": "<=",
+            "scale_factor": 1.0
+          }
+        ],
+        "objective_sense": "minimize",
+        "objective_coeffs": {
+          "e_1": 5.0,
+          "l_1": 10.0,
+          "e_2": 10.0,
+          "l_2": 20.0,
+          "e_3": 15.0,
+          "l_3": 30.0
+        },
+        "objective_constant": 0.0,
+        "metadata": {
+          "source": "llm_output"
+        }
+      },
+      "annotator_1": "false",
+      "annotator_2": "false",
+      "adjudicated": "false",
+      "note": "same lateness encoding error as P2/P4; exact counterexample feasible in ref, violates candidate"
+    }
+  ],
+  "review_note": "Graded by a single reviewer (AI) via independent LP/witness analysis of the shared (x,e,l) projection and z-encoding; not the intended 2-human protocol. Replace annotator fields before publication-grade use."
+}

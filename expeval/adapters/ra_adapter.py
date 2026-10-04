@@ -28,8 +28,21 @@ from expeval.adapters.common import Decision, Pair
 
 
 def _normalize(name: str) -> str:
-    """Case- and separator-insensitive key: ``x_1`` and ``x1`` both give ``x1``."""
-    return re.sub(r"[^a-z0-9]", "", name.lower())
+    """Case- and separator-insensitive key that also collapses index markers.
+
+    ``x_1`` / ``x1`` → ``x1`` and ``x_A1_R1`` / ``x_1_1`` / ``x11`` → ``x11``:
+    the leading alpha prefix plus the trailing digit sequence identifies the
+    variable regardless of whether the LLM wrote ``A1``/``R1`` labels or plain
+    indices. Names without any digit (e.g. ``x_apple``) keep the full stripped
+    form so distinct word-based names do not collide.
+    """
+    lowered = name.lower()
+    digits = re.findall(r"\d+", lowered)
+    if not digits:
+        return re.sub(r"[^a-z0-9]", "", lowered)
+    prefix = re.match(r"[a-z]+", lowered)
+    head = prefix.group(0) if prefix else ""
+    return head + "".join(digits)
 
 
 def _name_map(candidate_variables, gt_variables):

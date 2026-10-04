@@ -57,6 +57,10 @@ class ProjectionCertificate:
     variable_map: Dict[str, str] = field(default_factory=dict)  # candidate var -> reference var
     affine_substitutions: Dict[str, AffineExpression] = field(default_factory=dict)
     ref_eliminations: Dict[str, AffineExpression] = field(default_factory=dict)  # ref var -> f(candidate)
+    # Candidate auxiliary variables that do not map to any reference decision
+    # variable and must be existentially eliminated (projected out), not fixed.
+    # They only add degrees of freedom in the candidate feasible set.
+    existential_variables: Dict[str, str] = field(default_factory=dict)  # cand var -> reason
     reason: str = ""
     detection_method: str = "none"
     unsupported_features: List[str] = field(default_factory=list)
@@ -115,10 +119,46 @@ class ProjectionCertificate:
                 objective_coeffs[ref_var] = objective_coeffs.get(ref_var, Fraction(0)) + Fraction(str(coeff)) * Fraction(str(ref_coeff))
             objective_constant += Fraction(str(coeff)) * Fraction(str(expr.constant))
 
-        constraints = [
-            self.project_constraint(c)
-            for c in cand_ir.merge_bounds_into_constraints().constraints
-        ]
+        def project_row(c: "CanonicalConstraint") -> "CanonicalConstraint":
+            """Rewrite candidate vars to reference vars, keeping existential aux."""
+            coeffs: Dict[str, float] = {}
+            constant = Fraction(str(c.constant))
+            for cand_var, coeff in c.coeffs.items():
+                if cand_var in self.existential_variables:
+                    coeffs[cand_var] = coeffs.get(cand_var, 0.0) + float(coeff)
+                    continue
+                expr = self.affine_substitutions.get(cand_var)
+                if expr is None:
+                    raise ValueError(f"No affine substitution for candidate variable '{cand_var}'")
+                for ref_var, ref_coeff in expr.coeffs.items():
+                    coeffs[ref_var] = coeffs.get(ref_var, 0.0) + float(Fraction(str(coeff)) * Fraction(str(ref_coeff)))
+                constant += Fraction(str(coeff)) * Fraction(str(expr.constant))
+            return CanonicalConstraint(
+                name=c.name,
+                coeffs={v: a for v, a in coeffs.items() if abs(a) > 1e-12},
+                constant=_exact_decimal_float(constant),
+                sense=c.sense,
+                scale_factor=c.scale_factor,
+            )
+
+        merged = cand_ir.merge_bounds_into_constraints()
+        # Split bounds for existential aux (they carry their own domain).
+        projected = [project_row(c) for c in merged.constraints]
+        # Existential auxiliaries must be projected out (∃), not fixed.
+        for aux in self.existential_variables:
+            leq = [c for c in projected if c.sense in ("<=", "==") and aux in c.coeffs]
+            rest = [c for c in projected if c not in leq]
+            # Split equalities into two <= rows for exact elimination.
+            rows: List[CanonicalConstraint] = []
+            for c in leq:
+                if c.sense == "==":
+                    rows.append(replace(c, sense="<="))
+                    rows.append(replace(c, coeffs={v: -a for v, a in c.coeffs.items()},
+                                        constant=-c.constant, sense="<="))
+                else:
+                    rows.append(c)
+            projected = _fourier_motzkin_eliminate(rows, aux) + rest
+        constraints = projected
         # Eliminated reference variables (e.g. z_ji = 1 - z_ij) must be pinned in
         # the projected candidate space, otherwise the directed query would treat
         # them as free and over-approximate the candidate feasible set.
@@ -164,6 +204,7 @@ class ProjectionCertificate:
                 name: {"coeffs": dict(expr.coeffs), "constant": expr.constant}
                 for name, expr in self.ref_eliminations.items()
             },
+            "existential_variables": dict(self.existential_variables),
             "reason": self.reason,
             "detection_method": self.detection_method,
             "unsupported_features": list(self.unsupported_features),
@@ -414,6 +455,7 @@ def build_projection_certificate(
     ref_fp_index = _unique_fingerprint_index(ref_ir)
     cand_fp_index = _unique_fingerprint_index(cand_ir)
     subs, mapping, used, methods, warnings = {}, {}, set(), [], []
+    existential: Dict[str, str] = {}
 
     def failed(reason, unsupported_features=None):
         # Retain only locally checked pairs. Partial coverage is an explanation,
@@ -516,6 +558,19 @@ def build_projection_certificate(
                         "assumption, not a verified semantic equivalence."
                     )
             if target not in ref_ir.variables:
+                # No reference decision variable matches. If this is a pure
+                # auxiliary (absent from the candidate objective) it adds no
+                # decision meaning and may be projected out existentially instead
+                # of failing the whole certificate.
+                if _is_safe_existential_auxiliary(cand_ir, name, tolerance):
+                    existential[name] = "no reference decision variable; projected"
+                    methods.append("existential-projection")
+                    warnings.append(
+                        f"Candidate variable '{name}' has no reference counterpart and "
+                        "does not enter the objective; it is projected out existentially "
+                        "rather than fixed. This is a representation assumption."
+                    )
+                    continue
                 return failed(f"No verified mapping for {name}")
             # Name/pattern matches are only proposals: declared index sets must
             # not contradict them before we keep the pair.
@@ -592,6 +647,7 @@ def build_projection_certificate(
         variable_map=mapping,
         affine_substitutions=subs,
         ref_eliminations=ref_eliminations,
+        existential_variables=existential,
         reason="Verified under recorded mapping assumptions",
         detection_method="+".join(sorted(set(methods))),
         warnings=warnings,
@@ -749,6 +805,92 @@ def _unique_binary_digit_index(ir: CanonicalIR) -> Dict[str, str]:
     return {sig: names[0] for sig, names in buckets.items() if len(names) == 1}
 
 
+def _is_tautology(constraint: CanonicalConstraint, tolerance: float = 1e-9) -> bool:
+    """True when the row is satisfied by every point (``0 <= 0`` or ``0 == 0``).
+
+    After substituting an eliminated variable (e.g. ``z_ji = 1 - z_ij``) a linking
+    row such as ``z_ij + z_ji = 1`` collapses to ``0 = 0``. That is vacuously true
+    and must not be treated as a missing candidate row.
+    """
+    if any(abs(c) > tolerance for c in constraint.coeffs.values()):
+        return False
+    if constraint.sense == "<=":
+        return constraint.constant <= tolerance
+    if constraint.sense == "==":
+        return abs(constraint.constant) <= tolerance
+    return False
+
+
+def _fourier_motzkin_eliminate(
+    rows: List["CanonicalConstraint"],
+    var: str,
+    bound_rows: Optional[List["CanonicalConstraint"]] = None,
+) -> List["CanonicalConstraint"]:
+    """Project out a single continuous variable from a set of ``<=`` rows.
+
+    Rows are in canonical ``a·x + b <= 0`` form. For each upper row (positive
+    coefficient of ``var``) and lower row (negative coefficient), combine them to
+    remove ``var``. Rows that do not mention ``var`` pass through. This is exact
+    Fourier–Motzkin elimination; no solver is called, so the projection is a
+    symbolic, sound rewrite (used only for pure continuous auxiliaries).
+    """
+    pos, neg, other = [], [], []
+    for r in rows:
+        coeff = r.coeffs.get(var, 0.0)
+        if coeff > 0:
+            pos.append(r)
+        elif coeff < 0:
+            neg.append(r)
+        else:
+            other.append(r)
+    # Variable with only one sign is unbounded in that direction: its bound is
+    # vacuous, so all rows mentioning it can be dropped.
+    if not pos or not neg:
+        return other + list(bound_rows or [])
+    combined: List[CanonicalConstraint] = list(other)
+    seen = set()
+    for p in pos:
+        ap = p.coeffs[var]
+        for n in neg:
+            an = -n.coeffs[var]  # > 0
+            coeffs: Dict[str, float] = {}
+            for v, a in p.coeffs.items():
+                if v == var:
+                    continue
+                coeffs[v] = coeffs.get(v, 0.0) + a * an
+            for v, a in n.coeffs.items():
+                if v == var:
+                    continue
+                coeffs[v] = coeffs.get(v, 0.0) + a * ap
+            constant = p.constant * an + n.constant * ap
+            coeffs = {v: c for v, c in coeffs.items() if abs(c) > 1e-12}
+            key = (tuple(sorted(coeffs.items())), round(constant, 12), "<=")
+            if key in seen:
+                continue
+            seen.add(key)
+            combined.append(CanonicalConstraint(
+                name=f"_proj_{var}_{p.name}_{n.name}",
+                coeffs=coeffs, constant=constant, sense="<="))
+    return combined + list(bound_rows or [])
+
+
+def _is_safe_existential_auxiliary(cand_ir: CanonicalIR, name: str,
+                                   tolerance: float = 1e-9) -> bool:
+    """Whether a candidate-only variable may be projected out existentially.
+
+    Safe when the variable is a *pure auxiliary*: it does not appear in the
+    objective, so its feasible-set degrees of freedom do not change the decision
+    problem once projected. Any objective coefficient (however small) keeps the
+    variable as a decision variable and is therefore NOT projected. This mirrors
+    SOVER's "auxiliary variables that do not enter the objective" projection.
+    """
+    if abs(cand_ir.objective_coeffs.get(name, 0.0)) > tolerance:
+        return False
+    # A variable that appears in no constraint is unbounded/free; projecting it is
+    # still safe (it contributes no restriction), so allow that too.
+    return True
+
+
 def _constraints_equivalent(
     a: CanonicalConstraint,
     b: CanonicalConstraint,
@@ -798,7 +940,12 @@ def _verify_ref_eliminations(
     eliminations: Dict[str, AffineExpression],
     tolerance: float,
 ) -> bool:
-    """Every reference constraint using an eliminated var must match a candidate one."""
+    """Every reference constraint using an eliminated var must match a candidate one.
+
+    A linking row such as ``z_ij + z_ji = 1`` becomes a tautology (``0 = 0``) once
+    the eliminated variable is substituted; it imposes no obligation on the
+    candidate and is accepted vacuously (this is the ``order_link`` case).
+    """
     cand_constraints = list(cand_ir.constraints)
     for ref_c in ref_ir.constraints:
         if not any(v in eliminations for v in ref_c.coeffs):
@@ -806,6 +953,8 @@ def _verify_ref_eliminations(
         projected = _substitute_ref_constraint(ref_c, eliminations, ref_to_cand, tolerance)
         if projected is None:
             return False
+        if _is_tautology(projected, tolerance):
+            continue
         if not any(_constraints_equivalent(projected, c, tolerance) for c in cand_constraints):
             return False
     return True
